@@ -1,0 +1,51 @@
+{
+  "shortBio": "A short one-line description of who you are.",
+  "fullBio": "Write 2-3 paragraphs about your journey, what you do, and what drives you. Replace this text with your actual bio.",
+  "whatIdo": [
+    {
+      "title": "Expertise Area 1",
+      "icon": "Brain",
+      "color": "#8b5cf6",
+      "capabilities": [
+        "Capability or skill you want to highlight",
+        "Another capability",
+        "A third capability",
+        "A fourth capability"
+      ]
+    },
+    {
+      "title": "Expertise Area 2",
+      "icon": "Shield",
+      "color": "#10b981",
+      "capabilities": [
+        "Capability or skill you want to highlight",
+        "Another capability",
+        "A third capability",
+        "A fourth capability"
+      ]
+    },
+    {
+      "title": "Expertise Area 3",
+      "icon": "Terminal",
+      "color": "#3b82f6",
+      "capabilities": [
+        "Capability or skill you want to highlight",
+        "Another capability",
+        "A third capability",
+        "A fourth capability"
+      ]
+    },
+    {
+      "title": "Expertise Area 4",
+      "icon": "Users",
+      "color": "#f59e0b",
+      "capabilities": [
+        "Capability or skill you want to highlight",
+        "Another capability",
+        "A third capability",
+        "A fourth capability"
+      ]
+    }
+  ],
+  "philosophy": "Your personal philosophy or approach to your work."
+}

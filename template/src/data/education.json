@@ -1,0 +1,8 @@
+[
+  {
+    "degree": "Your Degree",
+    "institution": "Your Institution",
+    "period": "Start Year - End Year",
+    "focus": ["Subject 1", "Subject 2"]
+  }
+]

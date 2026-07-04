@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Your Article Title",
+    "description": "Brief description of the article",
+    "url": "https://medium.com/@your-handle/article-slug",
+    "date": "Month YYYY",
+    "topic": "AI & LLM",
+    "readTime": "5 min read"
+  }
+]

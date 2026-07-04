@@ -1,0 +1,10 @@
+[
+  {
+    "title": "Your Project",
+    "description": "Brief description of the project and what it does.",
+    "technologies": ["Tech 1", "Tech 2", "Tech 3"],
+    "features": ["Feature 1", "Feature 2", "Feature 3"],
+    "link": "https://github.com/your-github/project",
+    "featured": true
+  }
+]

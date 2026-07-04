@@ -1,0 +1,15 @@
+{
+  "expertise": [
+    {
+      "id": "domain-1",
+      "title": "Your Domain",
+      "description": "Description of this expertise area",
+      "icon": "Brain",
+      "color": "#8b5cf6",
+      "categories": {
+        "Category 1": ["Skill 1", "Skill 2", "Skill 3"],
+        "Category 2": ["Skill 4", "Skill 5"]
+      }
+    }
+  ]
+}

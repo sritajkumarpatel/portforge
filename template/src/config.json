@@ -1,0 +1,48 @@
+{
+  "personal": {
+    "name": "Your Name",
+    "email": "your@email.com",
+    "github": "your-github",
+    "linkedin": "your-linkedin",
+    "medium": "your-medium"
+  },
+  "bio": {
+    "headline": "Your Headline",
+    "subtitle": "2-3 sentences about what you do."
+  },
+  "titles": [
+    "Your Title 1",
+    "Your Title 2",
+    "Your Title 3"
+  ],
+  "sections": [
+    { "id": "about", "label": "01 — About", "navLabel": "About", "enabled": true },
+    { "id": "experience", "label": "02 — Experience", "navLabel": "Experience", "enabled": true },
+    { "id": "tech", "label": "03 — What I Work With", "navLabel": "Skills", "enabled": true },
+    { "id": "articles", "label": "04 — Thoughts & Ideas", "navLabel": "Thoughts", "enabled": true },
+    { "id": "projects", "label": "05 — Projects", "navLabel": "Projects", "enabled": true },
+    { "id": "awards", "label": "06 — Awards", "navLabel": "Awards", "enabled": true },
+    { "id": "certifications", "label": "07 — Certifications", "navLabel": "Certs", "enabled": true },
+    { "id": "education", "label": "08 — Education", "navLabel": "Education", "enabled": true }
+  ],
+  "theme": {
+    "primary": "slate",
+    "accent": "amber",
+    "mode": "dark",
+    "visualStyle": "minimal",
+    "presets": {
+      "slate-amber": { "primary": "slate", "accent": "amber" },
+      "indigo-violet": { "primary": "indigo", "accent": "violet" },
+      "emerald-teal": { "primary": "emerald", "accent": "teal" },
+      "rose-fuchsia": { "primary": "rose", "accent": "fuchsia" },
+      "blue-cyan": { "primary": "blue", "accent": "cyan" },
+      "slate-cyan": { "primary": "slate", "accent": "cyan" },
+      "indigo-amber": { "primary": "indigo", "accent": "amber" }
+    },
+    "customTheme": {
+      "primaryHex": "",
+      "accentHex": "",
+      "darkBg": ""
+    }
+  }
+}
