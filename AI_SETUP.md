@@ -9,15 +9,19 @@ Guide the user through setup. Ask **one question at a time**. After each answer,
 
 ---
 
-## Step 1: Project Name
+## Step 1: Your Name & Project Name
 
-Ask: *"What should your portfolio project be called? (default: my-portfolio)"*
+Ask: *"What's your name? I'll use it to personalize your portfolio."*
+
+Then ask: *"What should your portfolio project be called? (default: my-portfolio)"*
 
 ```bash
 cp -r template ./{project-name}
 ```
 
 All subsequent edits go into `./{project-name}/`.
+
+Update `./{project-name}/vite.config.js` — set the `base` to `/{project-name}/`.
 
 ---
 
@@ -123,8 +127,10 @@ Let them enable/disable and reorder. Update `sections[]` in config.json.
 (If LinkedIn import wasn't used, ask one section at a time.)
 
 ### Personal Info
-Ask for: name, email, headline, tagline, GitHub, LinkedIn, Medium.
+Ask for: name (unless already provided in Step 1), email, headline, tagline, GitHub, LinkedIn, Medium.
 Update config.json, index.html (title + description).
+
+Update `vite.config.js` — set `base` to `/<github-username>/<repo-name>/` if deploying to GitHub Pages, or `/{project-name}/` otherwise.
 
 ### Bio / About
 Ask for: 2-3 paragraph bio, 4 expertise pillars (with 3-4 capabilities each), philosophy.
@@ -161,6 +167,8 @@ Update `index.html` with:
 - Open Graph tags
 - Twitter Card tags
 - JSON-LD structured data
+
+Update `vite.config.js` — ensure `base` is set correctly for deployment (e.g. `/<repo-name>/` for GitHub Pages, or `/` for custom domain / user site).
 
 The template already has `netlify.toml`, `vercel.json`, `robots.txt`, `sitemap.xml`. Update the domain placeholder in `robots.txt` and `sitemap.xml`.
 

@@ -86,6 +86,35 @@ opencode .
 
 The agent will ask you 10-15 questions, one at a time, and build everything.
 
+## Demo
+
+Watch the agent build a complete portfolio using dummy data — no typing required:
+
+```bash
+# 1. Set up the demo environment
+npm run demo
+
+# 2. Open the demo directory with your agent
+cd _demo
+opencode .
+# or: claude .
+
+# 3. Say:
+"set up my portfolio"
+```
+
+The agent will read the demo `AI_SETUP.md` and auto-fill everything with realistic sample data ("Alex Rivera", full-stack engineer) — you just watch it happen.
+
+```
+
+Clean up when done:
+
+```bash
+npm run demo-clean
+```
+
+The `_demo/` directory is already in `.gitignore`.
+
 ## Manual Use
 
 If you prefer to do it yourself:
