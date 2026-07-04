@@ -1,1 +1,1 @@
-{"name":"portforge","private":true,"version":"1.0.0","description":"AI-powered portfolio builder. Talk to an agent, get a complete React portfolio.","type":"module"}
+{"name":"portforge","private":true,"version":"1.0.0","description":"AI-powered portfolio builder. Talk to an agent, get a complete React portfolio.","type":"module","scripts":{"demo":"scripts/demo.sh","demo-clean":"scripts/demo-clean.sh"}}
