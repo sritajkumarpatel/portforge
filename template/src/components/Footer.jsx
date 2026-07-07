@@ -1,22 +1,22 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail, Heart } from 'lucide-react';
 
 export default function Footer({ config }) {
   const socialLinks = [
     {
       href: `https://github.com/${config.personal.github}`,
-      label: "GitHub",
+      label: 'GitHub',
       icon: <Github size={20} />,
     },
     {
       href: `https://www.linkedin.com/in/${config.personal.linkedin}`,
-      label: "LinkedIn",
+      label: 'LinkedIn',
       icon: <Linkedin size={20} />,
     },
     {
       href: `mailto:${config.personal.email}`,
-      label: "Email",
+      label: 'Email',
       icon: <Mail size={20} />,
     },
   ];
@@ -30,9 +30,10 @@ export default function Footer({ config }) {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="flex items-center gap-1"
-            style={{ color: "var(--color-text-muted)" }}
+            style={{ color: 'var(--color-text-muted)' }}
           >
-            Built with <Heart size={14} style={{ color: "#f87171" }} className="fill-current" /> by {config.personal.name}
+            Built with <Heart size={14} style={{ color: '#f87171' }} className="fill-current" /> by{' '}
+            {config.personal.name}
           </motion.p>
 
           <div className="flex gap-4">
@@ -50,8 +51,8 @@ export default function Footer({ config }) {
                 whileHover={{ scale: 1.2, y: -3 }}
                 className="p-2 rounded-lg transition-colors"
                 style={{
-                  backgroundColor: "rgba(var(--color-primary-rgb), 0.1)",
-                  color: "var(--color-primary)",
+                  backgroundColor: 'rgba(var(--color-primary-rgb), 0.1)',
+                  color: 'var(--color-primary)',
                 }}
               >
                 {link.icon}

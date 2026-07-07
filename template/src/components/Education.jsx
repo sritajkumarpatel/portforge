@@ -1,7 +1,7 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { GraduationCap, Calendar } from "lucide-react";
-import Section from "./Section";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { GraduationCap, Calendar } from 'lucide-react';
+import Section from './Section';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -25,10 +25,12 @@ export default function Education({ education }) {
     <Section>
       <div className="flex items-center gap-3 mb-8">
         <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-          <GraduationCap style={{ color: "var(--color-primary)" }} size={32} />
+          <GraduationCap style={{ color: 'var(--color-primary)' }} size={32} />
         </motion.div>
-        <h3 className="text-3xl font-bold" style={{ color: "var(--color-primary)" }}>
-          <span style={{ color: "var(--color-accent)", fontSize: "0.75em", marginRight: "0.5rem" }}>08</span>
+        <h3 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+          <span style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}>
+            08
+          </span>
           Education
         </h3>
       </div>
@@ -50,7 +52,8 @@ export default function Education({ education }) {
             <div
               className="absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl pointer-events-none"
               style={{
-                background: "linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.12), transparent)",
+                background:
+                  'linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.12), transparent)',
               }}
             />
 
@@ -59,23 +62,24 @@ export default function Education({ education }) {
                 <div
                   className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
                   style={{
-                    background: "linear-gradient(135deg, var(--color-primary), var(--color-accent))",
-                    boxShadow: "0 4px 15px rgba(var(--color-primary-rgb), 0.3)",
+                    background:
+                      'linear-gradient(135deg, var(--color-primary), var(--color-accent))',
+                    boxShadow: '0 4px 15px rgba(var(--color-primary-rgb), 0.3)',
                   }}
                 >
                   <GraduationCap size={24} color="#ffffff" />
                 </div>
 
                 <div className="flex-1">
-                  <h4 className="font-bold mb-1" style={{ color: "var(--color-primary)" }}>
+                  <h4 className="font-bold mb-1" style={{ color: 'var(--color-primary)' }}>
                     {item.degree}
                   </h4>
-                  <p className="text-sm font-medium mb-2" style={{ color: "var(--color-accent)" }}>
+                  <p className="text-sm font-medium mb-2" style={{ color: 'var(--color-accent)' }}>
                     {item.institution}
                   </p>
                   <div className="flex items-center gap-2 mb-3">
-                    <Calendar size={12} style={{ color: "var(--color-text-muted)" }} />
-                    <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>
+                    <Calendar size={12} style={{ color: 'var(--color-text-muted)' }} />
+                    <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
                       {item.period}
                     </span>
                   </div>
@@ -85,8 +89,8 @@ export default function Education({ education }) {
                         key={tag}
                         className="text-xs px-2 py-0.5 rounded-full"
                         style={{
-                          backgroundColor: "rgba(var(--color-primary-rgb), 0.1)",
-                          color: "var(--color-text-secondary)",
+                          backgroundColor: 'rgba(var(--color-primary-rgb), 0.1)',
+                          color: 'var(--color-text-secondary)',
                         }}
                       >
                         {tag}

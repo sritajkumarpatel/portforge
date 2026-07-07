@@ -1,37 +1,64 @@
-import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Code2, Brain, Shield, Cloud, Terminal, Eye, Layers } from 'lucide-react';
 import {
-  Code2, Brain, Shield, Cloud, Terminal, Eye, Layers
-} from "lucide-react";
-import {
-  SiLangchain, SiHuggingface, SiOllama, SiAnthropic,
-  SiGithubcopilot, SiPython, SiJavascript, SiTypescript,
-  SiSpringboot, SiNodedotjs, SiHibernate, SiReact, SiSelenium,
-  SiCypress, SiPostman, SiCucumber, SiJenkins,
-  SiGitlab, SiGithubactions, SiDocker, SiKubernetes,
-  SiMysql, SiPostgresql, SiMongodb, SiRedis, SiElasticsearch,
-  SiKibana, SiGit, SiBitbucket, SiJira, SiConfluence, SiJetbrains
-} from "react-icons/si";
-import { FaJava, FaAws, FaMicrosoft } from "react-icons/fa";
-import Section from "./Section";
+  SiLangchain,
+  SiHuggingface,
+  SiOllama,
+  SiAnthropic,
+  SiGithubcopilot,
+  SiPython,
+  SiJavascript,
+  SiTypescript,
+  SiSpringboot,
+  SiNodedotjs,
+  SiHibernate,
+  SiReact,
+  SiSelenium,
+  SiCypress,
+  SiPostman,
+  SiCucumber,
+  SiJenkins,
+  SiGitlab,
+  SiGithubactions,
+  SiDocker,
+  SiKubernetes,
+  SiMysql,
+  SiPostgresql,
+  SiMongodb,
+  SiRedis,
+  SiElasticsearch,
+  SiKibana,
+  SiGit,
+  SiBitbucket,
+  SiJira,
+  SiConfluence,
+  SiJetbrains,
+} from 'react-icons/si';
+import { FaJava, FaAws, FaMicrosoft } from 'react-icons/fa';
+import Section from './Section';
 
 const ICON_MAP = {
-  Brain, Shield, Terminal, Cloud, Eye
+  Brain,
+  Shield,
+  Terminal,
+  Cloud,
+  Eye,
 };
 
 const SKILL_ICONS = {
   langchain: SiLangchain,
-  "hugging face": SiHuggingface,
+  'hugging face': SiHuggingface,
   huggingface: SiHuggingface,
   ollama: SiOllama,
   claude: SiAnthropic,
-  "github copilot": SiGithubcopilot,
+  'github copilot': SiGithubcopilot,
   python: SiPython,
   java: FaJava,
   javascript: SiJavascript,
   typescript: SiTypescript,
-  "spring boot": SiSpringboot,
-  "node.js": SiNodedotjs,
+  'spring boot': SiSpringboot,
+  'node.js': SiNodedotjs,
   hibernate: SiHibernate,
   reactjs: SiReact,
   react: SiReact,
@@ -40,8 +67,8 @@ const SKILL_ICONS = {
   postman: SiPostman,
   cucumber: SiCucumber,
   jenkins: SiJenkins,
-  "gitlab ci": SiGitlab,
-  "github actions": SiGithubactions,
+  'gitlab ci': SiGitlab,
+  'github actions': SiGithubactions,
   docker: SiDocker,
   kubernetes: SiKubernetes,
   mysql: SiMysql,
@@ -54,11 +81,11 @@ const SKILL_ICONS = {
   bitbucket: SiBitbucket,
   jira: SiJira,
   confluence: SiConfluence,
-  "intellij idea": SiJetbrains,
+  'intellij idea': SiJetbrains,
   aws: FaAws,
-  "microsoft azure": FaMicrosoft,
+  'microsoft azure': FaMicrosoft,
   azure: FaMicrosoft,
-  "azure ai": FaMicrosoft,
+  'azure ai': FaMicrosoft,
   openai: Brain,
   chatgpt: Brain,
 };
@@ -66,21 +93,21 @@ const SKILL_ICONS = {
 const FALLBACK_ICONS = {
   rag: Layers,
   depeval: Brain,
-  "model context protocol": Layers,
-  "local llms": Brain,
+  'model context protocol': Layers,
+  'local llms': Brain,
   jpa: Code2,
-  "rest assured": Code2,
+  'rest assured': Code2,
   testng: Shield,
   junit: Shield,
   testcafe: Shield,
-  "extent reports": Eye,
+  'extent reports': Eye,
   h2: Code2,
   scrum: Layers,
   kanban: Layers,
-  "azure devops": FaMicrosoft,
-  "azure boards": FaMicrosoft,
+  'azure devops': FaMicrosoft,
+  'azure boards': FaMicrosoft,
   playwright: Shield,
-  "vs code": Code2,
+  'vs code': Code2,
 };
 
 function getSkillIcon(name) {
@@ -120,15 +147,20 @@ export default function TechStack({ techStacks }) {
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-            <Code2 style={{ color: "var(--color-primary)" }} size={28} />
+            <Code2 style={{ color: 'var(--color-primary)' }} size={28} />
           </motion.div>
-          <h3 className="text-2xl md:text-3xl font-bold" style={{ color: "var(--color-primary)" }}>
-            <span style={{ color: "var(--color-accent)", fontSize: "0.75em", marginRight: "0.5rem" }}>03</span>
+          <h3 className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+            <span
+              style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}
+            >
+              03
+            </span>
             What I Work With
           </h3>
         </div>
-        <p className="text-sm ml-11" style={{ color: "var(--color-text-muted)" }}>
-          {totalSkills} technologies across {expertiseAreas.length} domains — each chosen for a purpose
+        <p className="text-sm ml-11" style={{ color: 'var(--color-text-muted)' }}>
+          {totalSkills} technologies across {expertiseAreas.length} domains — each chosen for a
+          purpose
         </p>
       </div>
 
@@ -157,7 +189,7 @@ export default function TechStack({ techStacks }) {
                 onClick={() => setActiveExpertise(isExpanded ? null : area.id)}
                 className="w-full flex items-center justify-between p-5 text-left transition-all"
                 style={{
-                  backgroundColor: isExpanded ? `${area.color}08` : "transparent",
+                  backgroundColor: isExpanded ? `${area.color}08` : 'transparent',
                 }}
               >
                 <div className="flex items-center gap-4 flex-1 min-w-0">
@@ -168,10 +200,13 @@ export default function TechStack({ techStacks }) {
                     <IconComponent size={22} style={{ color: area.color }} />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-base font-bold" style={{ color: "var(--color-text-primary)" }}>
+                    <h4
+                      className="text-base font-bold"
+                      style={{ color: 'var(--color-text-primary)' }}
+                    >
                       {area.title}
                     </h4>
-                    <p className="text-xs mt-0.5" style={{ color: "var(--color-text-muted)" }}>
+                    <p className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                       {area.description}
                     </p>
                   </div>
@@ -189,7 +224,8 @@ export default function TechStack({ techStacks }) {
                           color: area.color,
                         }}
                       >
-                        {skills.slice(0, 2).join(", ")}{skills.length > 2 ? "..." : ""}
+                        {skills.slice(0, 2).join(', ')}
+                        {skills.length > 2 ? '...' : ''}
                       </span>
                     ))}
                   </div>
@@ -206,7 +242,15 @@ export default function TechStack({ techStacks }) {
                     animate={{ rotate: isExpanded ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: "var(--color-text-muted)" }}>
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      style={{ color: 'var(--color-text-muted)' }}
+                    >
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </motion.div>
@@ -218,9 +262,9 @@ export default function TechStack({ techStacks }) {
                 {isExpanded && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
+                    animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="overflow-hidden"
                   >
                     <div
@@ -248,15 +292,15 @@ export default function TechStack({ techStacks }) {
                                   style={{
                                     backgroundColor: `${area.color}08`,
                                     border: `1px solid ${area.color}15`,
-                                    color: "var(--color-text-primary)",
+                                    color: 'var(--color-text-primary)',
                                   }}
                                 >
                                   <SkillIcon
-                                    name={typeof skill === "string" ? skill : skill.name}
+                                    name={typeof skill === 'string' ? skill : skill.name}
                                     size={13}
                                     style={{ color: area.color, flexShrink: 0 }}
                                   />
-                                  {typeof skill === "string" ? skill : skill.name}
+                                  {typeof skill === 'string' ? skill : skill.name}
                                 </motion.div>
                               ))}
                             </div>
@@ -280,15 +324,9 @@ export default function TechStack({ techStacks }) {
         className="mt-6 flex flex-wrap items-center justify-center gap-3"
       >
         {expertiseAreas.map((area) => (
-          <div
-            key={area.id}
-            className="flex items-center gap-1.5 cursor-default"
-          >
-            <div
-              className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: area.color }}
-            />
-            <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>
+          <div key={area.id} className="flex items-center gap-1.5 cursor-default">
+            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: area.color }} />
+            <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
               {area.title}
             </span>
           </div>

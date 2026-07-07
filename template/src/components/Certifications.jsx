@@ -1,7 +1,7 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Award } from "lucide-react";
-import Section from "./Section";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Award } from 'lucide-react';
+import Section from './Section';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -25,10 +25,12 @@ export default function Certifications({ certifications }) {
     <Section>
       <div className="flex items-center gap-3 mb-6">
         <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-          <Award style={{ color: "var(--color-primary)" }} size={32} />
+          <Award style={{ color: 'var(--color-primary)' }} size={32} />
         </motion.div>
-        <h3 className="text-3xl font-bold" style={{ color: "var(--color-primary)" }}>
-          <span style={{ color: "var(--color-accent)", fontSize: "0.75em", marginRight: "0.5rem" }}>07</span>
+        <h3 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+          <span style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}>
+            07
+          </span>
           Certifications
         </h3>
       </div>
@@ -57,14 +59,17 @@ export default function Certifications({ certifications }) {
                 />
               )}
               <div className="flex-1">
-                <h4 className="font-semibold text-sm mb-1" style={{ color: "var(--color-primary)" }}>
+                <h4
+                  className="font-semibold text-sm mb-1"
+                  style={{ color: 'var(--color-primary)' }}
+                >
                   {cert.name}
                 </h4>
-                <p className="text-xs" style={{ color: "var(--color-text-muted)" }}>
+                <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
                   {cert.issuer}
                 </p>
                 {cert.date && (
-                  <p className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>
+                  <p className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>
                     {cert.date}
                   </p>
                 )}

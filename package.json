@@ -1,1 +1,45 @@
-{"name":"portforge","private":true,"version":"1.0.0","description":"AI-powered portfolio builder. Talk to an agent, get a complete React portfolio.","type":"module","scripts":{"demo":"scripts/demo.sh","demo-clean":"scripts/demo-clean.sh"}}
+{
+  "name": "create-portforge",
+  "version": "1.0.0",
+  "description": "AI-powered React portfolio builder — talk to an agent, get a production-ready personal website in minutes.",
+  "keywords": [
+    "portfolio",
+    "react-portfolio",
+    "portfolio-builder",
+    "ai-agent",
+    "react-template",
+    "developer-portfolio",
+    "personal-website",
+    "vite",
+    "tailwind-css",
+    "framer-motion",
+    "opencode",
+    "claude-code",
+    "github-copilot"
+  ],
+  "homepage": "https://github.com/sritajkumarpatel/portforge#readme",
+  "bugs": {
+    "url": "https://github.com/sritajkumarpatel/portforge/issues"
+  },
+  "license": "MIT",
+  "author": "Sritaj Patel (https://github.com/sritajkumarpatel)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sritajkumarpatel/portforge.git"
+  },
+  "funding": "https://github.com/sponsors/sritajkumarpatel",
+  "type": "module",
+  "scripts": {
+    "demo": "scripts/demo.sh",
+    "demo-clean": "scripts/demo-clean.sh",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.4.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

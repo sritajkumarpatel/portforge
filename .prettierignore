@@ -1,0 +1,10 @@
+node_modules/
+dist/
+_demo/
+template/node_modules/
+template/dist/
+scripts/demo.sh
+.DS_Store
+*.md
+*.svg
+*.xml

@@ -1,7 +1,7 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Trophy, Medal, Award, Star, Crown, Sparkles } from "lucide-react";
-import Section from "./Section";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Trophy, Medal, Award, Star, Crown, Sparkles } from 'lucide-react';
+import Section from './Section';
 
 const AWARD_ICONS = [Trophy, Medal, Award, Star, Crown, Sparkles];
 
@@ -27,10 +27,12 @@ export default function Awards({ awards }) {
     <Section>
       <div className="flex items-center gap-3 mb-8">
         <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-          <Trophy style={{ color: "#fcd34d" }} size={32} />
+          <Trophy style={{ color: '#fcd34d' }} size={32} />
         </motion.div>
-        <h3 className="text-3xl font-bold" style={{ color: "var(--color-primary)" }}>
-          <span style={{ color: "var(--color-accent)", fontSize: "0.75em", marginRight: "0.5rem" }}>06</span>
+        <h3 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+          <span style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}>
+            06
+          </span>
           Awards & Recognition
         </h3>
       </div>
@@ -55,7 +57,7 @@ export default function Awards({ awards }) {
               <div
                 className="absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl pointer-events-none"
                 style={{
-                  background: "linear-gradient(135deg, rgba(252, 211, 77, 0.15), transparent)",
+                  background: 'linear-gradient(135deg, rgba(252, 211, 77, 0.15), transparent)',
                 }}
               />
 
@@ -67,23 +69,23 @@ export default function Awards({ awards }) {
                     transition={{ duration: 0.5 }}
                     className="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center"
                     style={{
-                      background: "linear-gradient(135deg, #fcd34d, #f59e0b)",
-                      boxShadow: "0 4px 15px rgba(252, 211, 77, 0.3)",
+                      background: 'linear-gradient(135deg, #fcd34d, #f59e0b)',
+                      boxShadow: '0 4px 15px rgba(252, 211, 77, 0.3)',
                     }}
                   >
                     <IconComponent size={24} color="#78350f" />
                   </motion.div>
 
                   <div className="flex-1">
-                    <h4 className="font-bold mb-1" style={{ color: "var(--color-primary)" }}>
+                    <h4 className="font-bold mb-1" style={{ color: 'var(--color-primary)' }}>
                       {award.title}
                     </h4>
                     <div className="flex flex-wrap items-center gap-2 mb-2">
                       <span
                         className="text-xs px-2 py-0.5 rounded-full font-medium"
                         style={{
-                          backgroundColor: "rgba(252, 211, 77, 0.15)",
-                          color: "#fcd34d",
+                          backgroundColor: 'rgba(252, 211, 77, 0.15)',
+                          color: '#fcd34d',
                         }}
                       >
                         {award.year}
@@ -92,8 +94,8 @@ export default function Awards({ awards }) {
                         <span
                           className="text-xs px-2 py-0.5 rounded-full"
                           style={{
-                            backgroundColor: "rgba(var(--color-primary-rgb), 0.1)",
-                            color: "var(--color-text-muted)",
+                            backgroundColor: 'rgba(var(--color-primary-rgb), 0.1)',
+                            color: 'var(--color-text-muted)',
                           }}
                         >
                           {award.quarter}
@@ -103,8 +105,8 @@ export default function Awards({ awards }) {
                         <span
                           className="text-xs px-2 py-0.5 rounded-full"
                           style={{
-                            backgroundColor: "rgba(var(--color-accent-rgb), 0.1)",
-                            color: "var(--color-accent)",
+                            backgroundColor: 'rgba(var(--color-accent-rgb), 0.1)',
+                            color: 'var(--color-accent)',
                           }}
                         >
                           {award.company}
@@ -112,7 +114,7 @@ export default function Awards({ awards }) {
                       )}
                     </div>
                     {award.description && (
-                      <p className="text-sm" style={{ color: "var(--color-text-secondary)" }}>
+                      <p className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
                         {award.description}
                       </p>
                     )}
