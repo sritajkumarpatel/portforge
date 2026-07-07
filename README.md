@@ -21,7 +21,7 @@
 
 ---
 
-https://github.com/user-attachments/assets/demo-placeholder
+<!-- TODO: Add screen recording or GIF showing the agent building a portfolio in real time -->
 
 </div>
 
@@ -49,6 +49,18 @@ Agent: "Your portfolio is ready at ./my-portfolio/"
 ```
 
 No account signup. No drag-and-drop. No CMS. Just your data + a React template + an AI agent.
+
+## PortForge vs Building From Scratch
+
+| | Self-built Portfolio | PortForge |
+|---|---|---|
+| **Setup time** | 2–4 weeks | 5 minutes |
+| **Design uniqueness** | You design it (or copy someone) | 3 themes × 7 color presets × custom hex |
+| **Content structure** | Build it yourself | 8 pre-built sections + LinkedIn import |
+| **Animations & UX** | Hours of Framer Motion work | Scroll reveals, orbs, glass cards included |
+| **SEO** | Manual meta tags, OG, JSON-LD | Built-in: Open Graph, Twitter Cards, sitemap |
+| **Deployment** | Research + configure hosting | Netlify/Vercel/GitHub Pages configs included |
+| **Maintenance** | You own every bug | Template updates via `git pull` |
 
 ## Features
 
@@ -86,6 +98,21 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 - **SEO-ready** — Open Graph tags, Twitter Cards, JSON-LD structured data, sitemap.xml, robots.txt
 - **One-command deploy** — GitHub Pages, Netlify, or Vercel with included configs
 - **Zero lock-in** — plain React + Vite + JSON data files. Take it anywhere.
+
+## Roadmap
+
+- [x] LinkedIn profile auto-import
+- [x] 3 visual themes (Minimal, Bold, Terminal)
+- [x] 7 color presets + custom hex colors
+- [x] 8 configurable content sections
+- [x] Dark/light mode with persistence
+- [x] 1-click deploy (Netlify, Vercel, GitHub Pages)
+- [ ] Screenshot / GIF demo in README
+- [ ] Tabbed and timeline navigation modes
+- [ ] More hero layouts (left-profile, full-image)
+- [ ] Data schema validation (JSON Schema or Zod)
+- [ ] Component unit tests (Vitest + Testing Library)
+- [ ] VS Code extension for visual config editing
 
 ## Tech Stack
 
@@ -209,5 +236,6 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 <p align="center">
 Built by <a href="https://github.com/sritajkumarpatel">Sritaj Patel</a><br>
-Designed for agentic setup — no hand-editing required.
+Designed for agentic setup — no hand-editing required.<br><br>
+If PortForge saves you time, <a href="https://github.com/sritajkumarpatel/portforge">star the repo ⭐</a>
 </p>
