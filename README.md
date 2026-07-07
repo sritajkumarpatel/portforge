@@ -9,6 +9,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/sritajkumarpatel/portforge/ci.yml?branch=main&style=flat-square)](https://github.com/sritajkumarpatel/portforge/actions)
 [![npm](https://img.shields.io/npm/v/portforge?style=flat-square)](https://www.npmjs.com/package/portforge)
 [![GitHub stars](https://img.shields.io/github/stars/sritajkumarpatel/portforge?style=flat-square)](https://github.com/sritajkumarpatel/portforge/stargazers)
+[![GitHub release](https://img.shields.io/github/v/release/sritajkumarpatel/portforge?style=flat-square)](https://github.com/sritajkumarpatel/portforge/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)](https://reactjs.org/)
