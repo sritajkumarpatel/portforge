@@ -1,11 +1,11 @@
-@import "./themes/active.css";
+@import './themes/active.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -32,7 +32,9 @@ body {
   background-image:
     radial-gradient(800px 600px at 20% 80%, rgba(var(--color-accent-rgb), 0.06), transparent),
     radial-gradient(600px 400px at 80% 20%, rgba(var(--color-primary-rgb), 0.04), transparent);
-  transition: background-color 0.3s ease, background-image 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    background-image 0.3s ease;
 }
 
 #root {
@@ -41,23 +43,51 @@ body {
 }
 
 @layer utilities {
-  .bg-primary { background-color: var(--color-primary); }
-  .bg-primary-light { background-color: var(--color-primary-light); }
-  .bg-primary-dark { background-color: var(--color-primary-dark); }
-  .bg-accent { background-color: var(--color-accent); }
-  .bg-accent-light { background-color: var(--color-accent-light); }
-  .bg-accent-dark { background-color: var(--color-accent-dark); }
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-primary-light {
+    background-color: var(--color-primary-light);
+  }
+  .bg-primary-dark {
+    background-color: var(--color-primary-dark);
+  }
+  .bg-accent {
+    background-color: var(--color-accent);
+  }
+  .bg-accent-light {
+    background-color: var(--color-accent-light);
+  }
+  .bg-accent-dark {
+    background-color: var(--color-accent-dark);
+  }
 
-  .bg-bg-primary { background-color: var(--color-bg-primary); }
-  .bg-bg-secondary { background-color: var(--color-bg-secondary); }
-  .bg-bg-tertiary { background-color: var(--color-bg-tertiary); }
+  .bg-bg-primary {
+    background-color: var(--color-bg-primary);
+  }
+  .bg-bg-secondary {
+    background-color: var(--color-bg-secondary);
+  }
+  .bg-bg-tertiary {
+    background-color: var(--color-bg-tertiary);
+  }
 
-  .text-primary { color: var(--color-text-primary); }
-  .text-secondary { color: var(--color-text-secondary); }
-  .text-muted { color: var(--color-text-muted); }
+  .text-primary {
+    color: var(--color-text-primary);
+  }
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+  .text-muted {
+    color: var(--color-text-muted);
+  }
 
-  .border-primary { border-color: var(--color-border); }
-  .border-primary-strong { border-color: var(--color-border-strong); }
+  .border-primary {
+    border-color: var(--color-border);
+  }
+  .border-primary-strong {
+    border-color: var(--color-border-strong);
+  }
 
   .glass-card {
     background: var(--color-glass-bg);
@@ -82,8 +112,13 @@ body {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Space Grotesk", system-ui, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   color: var(--color-text-primary);
 }
 
@@ -93,7 +128,10 @@ h3.text-2xl,
 }
 
 @media (max-width: 768px) {
-  .max-w-6xl { padding-left: 1rem; padding-right: 1rem; }
+  .max-w-6xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 nav {
@@ -107,11 +145,24 @@ nav h1 {
   font-size: 1.25rem;
   white-space: nowrap;
 }
-nav button { color: var(--color-text-muted); }
-.nav-right button { padding: 0.4rem 0.75rem; font-size: 0.8rem; border-radius: 0.5rem; color: var(--color-text-muted); }
-.nav-right button:hover { color: var(--color-accent); }
-.nav-right { flex-wrap: nowrap; }
-.nav-right button { white-space: nowrap; }
+nav button {
+  color: var(--color-text-muted);
+}
+.nav-right button {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+  color: var(--color-text-muted);
+}
+.nav-right button:hover {
+  color: var(--color-accent);
+}
+.nav-right {
+  flex-wrap: nowrap;
+}
+.nav-right button {
+  white-space: nowrap;
+}
 
 footer {
   border-top: 1px solid var(--color-footer-border);
@@ -123,13 +174,27 @@ html {
   scroll-behavior: smooth;
 }
 
-footer p { font-size: 0.875rem; color: var(--color-text-muted); }
-footer a:hover { color: var(--color-accent); }
+footer p {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+footer a:hover {
+  color: var(--color-accent);
+}
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: var(--color-scrollbar-track); }
-::-webkit-scrollbar-thumb { background: var(--color-scrollbar-thumb); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-scrollbar-thumb-hover); }
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-thumb-hover);
+}
 
 .line-clamp-2 {
   overflow: hidden;
@@ -146,18 +211,32 @@ footer a:hover { color: var(--color-accent); }
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 html:not(.dark) body {

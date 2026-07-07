@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
 
 const shimmerStyle = {
-  background: "linear-gradient(90deg, var(--color-skeleton) 25%, var(--color-skeleton-shine) 50%, var(--color-skeleton) 75%)",
-  backgroundSize: "200% 100%",
-  animation: "shimmer 1.5s infinite ease-in-out",
+  background:
+    'linear-gradient(90deg, var(--color-skeleton) 25%, var(--color-skeleton-shine) 50%, var(--color-skeleton) 75%)',
+  backgroundSize: '200% 100%',
+  animation: 'shimmer 1.5s infinite ease-in-out',
 };
 
-export function SkeletonLine({ width = "100%", height = "1rem", className = "" }) {
+export function SkeletonLine({ width = '100%', height = '1rem', className = '' }) {
   return (
     <div
       className={`rounded-md ${className}`}
@@ -19,7 +20,7 @@ export function SkeletonLine({ width = "100%", height = "1rem", className = "" }
   );
 }
 
-export function SkeletonCircle({ size = "2.5rem", className = "" }) {
+export function SkeletonCircle({ size = '2.5rem', className = '' }) {
   return (
     <div
       className={`rounded-full ${className}`}
@@ -32,12 +33,9 @@ export function SkeletonCircle({ size = "2.5rem", className = "" }) {
   );
 }
 
-export function SkeletonCard({ className = "" }) {
+export function SkeletonCard({ className = '' }) {
   return (
-    <div
-      className={`glass-card rounded-xl p-6 ${className}`}
-      style={{ transform: "none" }}
-    >
+    <div className={`glass-card rounded-xl p-6 ${className}`} style={{ transform: 'none' }}>
       <div className="flex items-start gap-4 mb-4">
         <SkeletonCircle size="3rem" />
         <div className="flex-1 space-y-2">
@@ -61,10 +59,7 @@ export function SkeletonCard({ className = "" }) {
 
 export function SkeletonGrid({ count = 4, columns = 2 }) {
   return (
-    <div
-      className="grid gap-4"
-      style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
-    >
+    <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
       {Array.from({ length: count }).map((_, i) => (
         <SkeletonCard key={i} />
       ))}

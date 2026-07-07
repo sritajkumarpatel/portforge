@@ -1,15 +1,10 @@
 [
   {
     "company": "Your Company",
-    "roles": [
-      { "title": "Your Role", "period": "Start Date - End Date" }
-    ],
+    "roles": [{ "title": "Your Role", "period": "Start Date - End Date" }],
     "duration": "X years X months",
     "current": true,
     "location": "City, Country",
-    "highlights": [
-      "Key achievement or responsibility",
-      "Another highlight"
-    ]
+    "highlights": ["Key achievement or responsibility", "Another highlight"]
   }
 ]

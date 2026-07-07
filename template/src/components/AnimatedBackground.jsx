@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const orbConfig = [
   {
     id: 1,
     size: 320,
-    color: "var(--color-accent)",
+    color: 'var(--color-accent)',
     opacity: 0.06,
     initialX: -80,
     initialY: 100,
@@ -17,7 +17,7 @@ const orbConfig = [
   {
     id: 2,
     size: 280,
-    color: "var(--color-primary)",
+    color: 'var(--color-primary)',
     opacity: 0.04,
     initialX: 0.7,
     initialY: 0.3,
@@ -29,7 +29,7 @@ const orbConfig = [
   {
     id: 3,
     size: 200,
-    color: "var(--color-accent)",
+    color: 'var(--color-accent)',
     opacity: 0.05,
     initialX: 0.25,
     initialY: 0.75,
@@ -41,7 +41,7 @@ const orbConfig = [
   {
     id: 4,
     size: 240,
-    color: "var(--color-primary)",
+    color: 'var(--color-primary)',
     opacity: 0.03,
     initialX: 0.65,
     initialY: 0.65,
@@ -61,18 +61,14 @@ export default function AnimatedBackground() {
     const handleResize = () => {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
       {orbConfig.map((orb) => {
-        const y = useTransform(
-          scrollY,
-          [0, 1000],
-          [0, -200 * orb.parallaxSpeed]
-        );
+        const y = useTransform(scrollY, [0, 1000], [0, -200 * orb.parallaxSpeed]);
 
         const left = orb.initialX < 1 ? `${orb.initialX * 100}%` : `${orb.initialX}px`;
         const top = orb.initialY < 1 ? `${orb.initialY * 100}%` : `${orb.initialY}px`;
@@ -81,15 +77,15 @@ export default function AnimatedBackground() {
           <motion.div
             key={orb.id}
             style={{
-              position: "absolute",
+              position: 'absolute',
               width: orb.size,
               height: orb.size,
               left,
               top,
-              borderRadius: "50%",
+              borderRadius: '50%',
               background: `radial-gradient(circle, ${orb.color}, transparent 70%)`,
               opacity: orb.opacity,
-              filter: "blur(60px)",
+              filter: 'blur(60px)',
               y,
             }}
             animate={{
@@ -100,7 +96,7 @@ export default function AnimatedBackground() {
             transition={{
               duration: orb.floatDuration,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: 'easeInOut',
             }}
           />
         );
@@ -112,7 +108,7 @@ export default function AnimatedBackground() {
         style={{
           backgroundImage: `linear-gradient(var(--color-border) 1px, transparent 1px),
             linear-gradient(90deg, var(--color-border) 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
+          backgroundSize: '80px 80px',
         }}
       />
     </div>

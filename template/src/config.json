@@ -10,11 +10,7 @@
     "headline": "Your Headline",
     "subtitle": "2-3 sentences about what you do."
   },
-  "titles": [
-    "Your Title 1",
-    "Your Title 2",
-    "Your Title 3"
-  ],
+  "titles": ["Your Title 1", "Your Title 2", "Your Title 3"],
   "sections": [
     { "id": "about", "label": "01 — About", "navLabel": "About", "enabled": true },
     { "id": "experience", "label": "02 — Experience", "navLabel": "Experience", "enabled": true },
@@ -22,7 +18,12 @@
     { "id": "articles", "label": "04 — Thoughts & Ideas", "navLabel": "Thoughts", "enabled": true },
     { "id": "projects", "label": "05 — Projects", "navLabel": "Projects", "enabled": true },
     { "id": "awards", "label": "06 — Awards", "navLabel": "Awards", "enabled": true },
-    { "id": "certifications", "label": "07 — Certifications", "navLabel": "Certs", "enabled": true },
+    {
+      "id": "certifications",
+      "label": "07 — Certifications",
+      "navLabel": "Certs",
+      "enabled": true
+    },
     { "id": "education", "label": "08 — Education", "navLabel": "Education", "enabled": true }
   ],
   "theme": {

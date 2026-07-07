@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
-import { Linkedin, Mail, Github, BookOpen, ArrowDown } from "lucide-react";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { Linkedin, Mail, Github, BookOpen, ArrowDown } from 'lucide-react';
 
 const DEFAULT_TITLES = [
-  "Senior Architect at DevOn",
-  "AI Automation Architect",
-  "Quality Engineer → Architect",
-  "Scrum Master (PSM I, CSM)",
-  "Building Intelligent Workflows",
-  "11 Years in QE",
-  "Workflow Architect",
+  'Senior Architect at DevOn',
+  'AI Automation Architect',
+  'Quality Engineer → Architect',
+  'Scrum Master (PSM I, CSM)',
+  'Building Intelligent Workflows',
+  '11 Years in QE',
+  'Workflow Architect',
 ];
 
 const floatingOrb = {
   animate: {
     y: [0, -20, 0],
     opacity: [0.5, 1, 0.5],
-    transition: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+    transition: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
   },
 };
 
@@ -25,11 +25,11 @@ const floatingOrb2 = {
     y: [0, 15, 0],
     x: [0, -10, 0],
     opacity: [0.3, 0.7, 0.3],
-    transition: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+    transition: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
   },
 };
 
-function AnimatedCounter({ end, suffix = "", duration = 2 }) {
+function AnimatedCounter({ end, suffix = '', duration = 2 }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -52,16 +52,22 @@ function AnimatedCounter({ end, suffix = "", duration = 2 }) {
 
   return (
     <span ref={ref}>
-      {count}{suffix}
+      {count}
+      {suffix}
     </span>
   );
 }
 
 const stats = [
-  { value: 11, suffix: "+", label: "Years Experience", sublabel: "QE to Architect" },
-  { value: 90, suffix: "%", label: "Efficiency Gains", sublabel: "Via automation" },
-  { value: 7, suffix: "", label: "Certifications", sublabel: "PSM I, CSM, Azure AI, DevOps & more" },
-  { value: 16, suffix: "+", label: "Articles Published", sublabel: "On Medium" },
+  { value: 11, suffix: '+', label: 'Years Experience', sublabel: 'QE to Architect' },
+  { value: 90, suffix: '%', label: 'Efficiency Gains', sublabel: 'Via automation' },
+  {
+    value: 7,
+    suffix: '',
+    label: 'Certifications',
+    sublabel: 'PSM I, CSM, Azure AI, DevOps & more',
+  },
+  { value: 16, suffix: '+', label: 'Articles Published', sublabel: 'On Medium' },
 ];
 
 export default function Hero({ config }) {
@@ -105,31 +111,31 @@ export default function Hero({ config }) {
   const socialLinks = [
     {
       href: `https://www.linkedin.com/in/${config.personal.linkedin}`,
-      label: "LinkedIn",
+      label: 'LinkedIn',
       icon: <Linkedin size={18} />,
-      bg: "bg-[#0A66C2]",
-      hover: "hover:bg-[#084B8A]",
+      bg: 'bg-[#0A66C2]',
+      hover: 'hover:bg-[#084B8A]',
     },
     {
       href: `mailto:${config.personal.email}`,
-      label: "Contact Me",
+      label: 'Contact Me',
       icon: <Mail size={18} />,
-      bg: "bg-slate-600",
-      hover: "hover:bg-slate-500",
+      bg: 'bg-slate-600',
+      hover: 'hover:bg-slate-500',
     },
     {
       href: `https://github.com/${config.personal.github}`,
-      label: "GitHub",
+      label: 'GitHub',
       icon: <Github size={18} />,
-      bg: "bg-[#24292F]",
-      hover: "hover:bg-[#111214]",
+      bg: 'bg-[#24292F]',
+      hover: 'hover:bg-[#111214]',
     },
     {
       href: `https://medium.com/@${config.personal.medium}`,
-      label: "Medium",
+      label: 'Medium',
       icon: <BookOpen size={18} />,
-      bg: "bg-[#00ab6c]",
-      hover: "hover:bg-[#008c54]",
+      bg: 'bg-[#00ab6c]',
+      hover: 'hover:bg-[#008c54]',
     },
   ];
 
@@ -146,7 +152,7 @@ export default function Hero({ config }) {
       />
       <motion.div
         animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
         className="absolute top-1/3 right-1/4 w-48 h-48 bg-primary/10 rounded-full blur-2xl pointer-events-none"
       />
 
@@ -156,21 +162,24 @@ export default function Hero({ config }) {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
             className="relative"
           >
             <motion.img
               src={`${import.meta.env.BASE_URL}images/profile.png`}
               alt={config.personal.name}
               className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover"
-              style={{ boxShadow: "0 0 40px rgba(var(--color-primary-rgb), 0.3)" }}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 60px rgba(var(--color-primary-rgb), 0.5)" }}
+              style={{ boxShadow: '0 0 40px rgba(var(--color-primary-rgb), 0.3)' }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: '0 0 60px rgba(var(--color-primary-rgb), 0.5)',
+              }}
             />
             <motion.div
               className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full flex items-center justify-center"
               style={{
-                backgroundColor: "#10b981",
-                boxShadow: "0 0 20px rgba(16, 185, 129, 0.5)",
+                backgroundColor: '#10b981',
+                boxShadow: '0 0 20px rgba(16, 185, 129, 0.5)',
               }}
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -183,11 +192,11 @@ export default function Hero({ config }) {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
           >
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 min-h-[60px] flex items-center justify-center"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: 'var(--color-text-primary)' }}
             >
               <span className="inline-block">
                 {displayText}
@@ -204,12 +213,12 @@ export default function Hero({ config }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
               className="text-lg md:text-xl font-semibold mb-4 text-center"
-              style={{ color: "var(--color-text-primary)" }}
+              style={{ color: 'var(--color-text-primary)' }}
             >
-              <span className="italic" style={{ color: "var(--color-primary)" }}>
-                {config.bio.headline.split(" ").slice(0, 2).join(" ")}
-              </span>{" "}
-              {config.bio.headline.split(" ").slice(2).join(" ")}
+              <span className="italic" style={{ color: 'var(--color-primary)' }}>
+                {config.bio.headline.split(' ').slice(0, 2).join(' ')}
+              </span>{' '}
+              {config.bio.headline.split(' ').slice(2).join(' ')}
             </motion.p>
 
             <motion.p
@@ -217,7 +226,7 @@ export default function Hero({ config }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
               className="max-w-2xl mx-auto mb-8 leading-relaxed text-sm md:text-base"
-              style={{ color: "var(--color-text-secondary)" }}
+              style={{ color: 'var(--color-text-secondary)' }}
             >
               {config.bio.subtitle}
             </motion.p>
@@ -240,7 +249,7 @@ export default function Hero({ config }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -3, boxShadow: "0 10px 30px rgba(0,0,0,0.2)" }}
+                whileHover={{ scale: 1.05, y: -3, boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}
                 whileTap={{ scale: 0.95 }}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-xl ${link.bg} ${link.hover} text-white font-medium transition-all shadow-lg text-sm`}
               >
@@ -266,13 +275,19 @@ export default function Hero({ config }) {
                 whileHover={{ y: -4, scale: 1.03 }}
                 className="glass-card rounded-xl p-4 text-center cursor-default"
               >
-                <p className="text-2xl md:text-3xl font-extrabold" style={{ color: "var(--color-primary)" }}>
+                <p
+                  className="text-2xl md:text-3xl font-extrabold"
+                  style={{ color: 'var(--color-primary)' }}
+                >
                   <AnimatedCounter end={stat.value} suffix={stat.suffix} />
                 </p>
-                <p className="text-xs font-semibold mt-1" style={{ color: "var(--color-text-primary)" }}>
+                <p
+                  className="text-xs font-semibold mt-1"
+                  style={{ color: 'var(--color-text-primary)' }}
+                >
                   {stat.label}
                 </p>
-                <p className="text-[10px] mt-0.5" style={{ color: "var(--color-text-muted)" }}>
+                <p className="text-[10px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                   {stat.sublabel}
                 </p>
               </motion.div>
@@ -298,7 +313,7 @@ export default function Hero({ config }) {
         </motion.span>
         <motion.div
           animate={{ y: [0, 12, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
           className="p-3 rounded-full bg-primary/20 border border-primary/30"
         >
           <ArrowDown size={24} className="text-primary" />

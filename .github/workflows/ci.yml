@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npx prettier --check .
+
+      - name: Build template
+        working-directory: template
+        run: |
+          npm ci
+          npm run build
+
+      - name: Validate JSON files
+        working-directory: template
+        run: |
+          for f in src/data/*.json src/config.json; do
+            node -e "JSON.parse(require('fs').readFileSync('$f', 'utf8'))"
+            echo "✓ $f is valid JSON"
+          done

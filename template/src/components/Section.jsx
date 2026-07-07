@@ -1,16 +1,16 @@
-import React from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const sectionVariants = {
   hidden: {
     opacity: 0,
     y: 40,
-    filter: "blur(4px)",
+    filter: 'blur(4px)',
   },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
+    filter: 'blur(0px)',
     transition: {
       duration: 0.7,
       ease: [0.22, 1, 0.36, 1],
@@ -23,12 +23,12 @@ const childVariants = {
   hidden: {
     opacity: 0,
     y: 20,
-    filter: "blur(2px)",
+    filter: 'blur(2px)',
   },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
+    filter: 'blur(0px)',
     transition: {
       duration: 0.5,
       ease: [0.22, 1, 0.36, 1],
@@ -36,7 +36,7 @@ const childVariants = {
   },
 };
 
-export default function Section({ className = "", children, noAnimation = false }) {
+export default function Section({ className = '', children, noAnimation = false }) {
   if (noAnimation) {
     return (
       <section className={`py-8 px-6 ${className}`}>
@@ -49,7 +49,7 @@ export default function Section({ className = "", children, noAnimation = false 
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: '-80px' }}
       variants={sectionVariants}
       className={`py-8 px-6 ${className}`}
     >

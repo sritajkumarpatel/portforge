@@ -1,8 +1,8 @@
-import React from "react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { User, Brain, Shield, Terminal, Users, ArrowRight } from "lucide-react";
-import Section from "./Section";
+import React from 'react';
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { User, Brain, Shield, Terminal, Users, ArrowRight } from 'lucide-react';
+import Section from './Section';
 
 const ICON_MAP = { Brain, Shield, Terminal, Users };
 
@@ -35,7 +35,7 @@ export default function About({ aboutMe }) {
   if (!aboutMe) return null;
 
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
     <Section>
@@ -48,10 +48,12 @@ export default function About({ aboutMe }) {
         className="flex items-center gap-3 mb-8"
       >
         <motion.div whileHover={{ rotate: 360, scale: 1.1 }} transition={{ duration: 0.5 }}>
-          <User style={{ color: "var(--color-primary)" }} size={28} />
+          <User style={{ color: 'var(--color-primary)' }} size={28} />
         </motion.div>
-        <h3 className="text-2xl md:text-3xl font-bold" style={{ color: "var(--color-primary)" }}>
-          <span style={{ color: "var(--color-accent)", fontSize: "0.75em", marginRight: "0.5rem" }}>01</span>
+        <h3 className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+          <span style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}>
+            01
+          </span>
           About Me
         </h3>
       </motion.div>
@@ -68,13 +70,14 @@ export default function About({ aboutMe }) {
         <div
           className="absolute top-0 left-0 w-full h-1"
           style={{
-            background: "linear-gradient(90deg, var(--color-primary), var(--color-accent), transparent)",
+            background:
+              'linear-gradient(90deg, var(--color-primary), var(--color-accent), transparent)',
           }}
         />
         <div className="flex items-start gap-4">
           <p
             className="leading-relaxed text-sm md:text-base"
-            style={{ color: "var(--color-text-secondary)" }}
+            style={{ color: 'var(--color-text-secondary)' }}
           >
             {aboutMe.fullBio}
           </p>
@@ -86,7 +89,7 @@ export default function About({ aboutMe }) {
         ref={ref}
         variants={stagger}
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        animate={isInView ? 'visible' : 'hidden'}
         className="grid md:grid-cols-2 gap-4 mb-8"
       >
         {aboutMe.whatIdo.map((item, index) => {
@@ -118,7 +121,10 @@ export default function About({ aboutMe }) {
                   >
                     <IconComponent size={20} style={{ color: item.color }} />
                   </motion.div>
-                  <h4 className="text-base font-bold" style={{ color: "var(--color-text-primary)" }}>
+                  <h4
+                    className="text-base font-bold"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
                     {item.title}
                   </h4>
                 </div>
@@ -131,7 +137,7 @@ export default function About({ aboutMe }) {
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ delay: 0.3 + i * 0.08, duration: 0.4 }}
                       className="flex items-start gap-2.5 text-xs md:text-sm"
-                      style={{ color: "var(--color-text-secondary)" }}
+                      style={{ color: 'var(--color-text-secondary)' }}
                     >
                       <ArrowRight
                         size={14}
@@ -159,12 +165,12 @@ export default function About({ aboutMe }) {
         <div
           className="absolute inset-0 opacity-5"
           style={{
-            background: "linear-gradient(135deg, var(--color-primary), var(--color-accent))",
+            background: 'linear-gradient(135deg, var(--color-primary), var(--color-accent))',
           }}
         />
         <p
           className="relative text-sm md:text-base italic leading-relaxed max-w-3xl mx-auto"
-          style={{ color: "var(--color-text-secondary)" }}
+          style={{ color: 'var(--color-text-secondary)' }}
         >
           "{aboutMe.philosophy}"
         </p>
