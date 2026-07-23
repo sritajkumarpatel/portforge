@@ -107,6 +107,17 @@ Write techStacks.json with 4 domains:
    - Build: Turborepo, esbuild, SWC, Rolldown
    - Testing: Vitest, Playwright, Cypress, Testing Library
 
+## Step 11b: Highlights & Stats
+Write highlights.json with 4 cards and a tools list:
+- cards: (Code2, "What I Build", "AI + Automation Systems", "Intelligent workflows and test frameworks", #8b5cf6), (Briefcase, "What I Do", "Architect & Automate", "Build systems, lead teams, ship quality", #10b981), (Clock, "Experience", "6+ Years", "Full-stack engineer to systems architect", #f59e0b), (Zap, "Focus", "Distributed Systems", "Scalable infra meets developer experience", #ec4899)
+- tools: Playwright, TypeScript, Rust, Kafka, GitHub Actions, Docker
+
+Write stats.json with 4 entries for the hero counters:
+- 6+ Years Experience (Full-stack engineering)
+- 4 Projects Shipped (Open source & production)
+- 12+ Technologies (Across the stack)
+- 16+ Articles Published (On Medium)
+
 ## Step 12: Projects
 Write projects.json with 4 projects:
 

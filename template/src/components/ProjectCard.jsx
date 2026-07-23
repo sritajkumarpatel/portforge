@@ -66,8 +66,14 @@ export default function ProjectCard({ project, onOpenModal }) {
         </div>
 
         {/* View Button */}
-        <motion.div
-          className="absolute top-3 right-3 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+        <motion.button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenModal?.(project);
+          }}
+          aria-label={`View details for ${project.title}`}
+          className="absolute top-3 right-3 p-2 rounded-full opacity-0 group-hover:opacity-100 focus:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white transition-opacity"
           style={{
             backgroundColor: 'rgba(255, 255, 255, 0.2)',
             color: 'white',
@@ -75,7 +81,7 @@ export default function ProjectCard({ project, onOpenModal }) {
           whileHover={{ scale: 1.1 }}
         >
           <ArrowUpRight size={16} />
-        </motion.div>
+        </motion.button>
       </div>
 
       {/* Content */}

@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Github, ExternalLink, BookOpen } from 'lucide-react';
+
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -25,17 +28,43 @@ const modalVariants = {
 };
 
 export default function ProjectModal({ project, isOpen, onClose }) {
+  const modalRef = useRef(null);
+  const previouslyFocused = useRef(null);
+
   useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') onClose();
+    if (!isOpen) return;
+
+    previouslyFocused.current = document.activeElement;
+    const modalEl = modalRef.current;
+    const focusable = () => Array.from(modalEl?.querySelectorAll(FOCUSABLE_SELECTOR) || []);
+    (focusable()[0] || modalEl)?.focus();
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const items = focusable();
+      if (items.length === 0) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
-    if (isOpen) {
-      document.addEventListener('keydown', handleEsc);
-      document.body.style.overflow = 'hidden';
-    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
     return () => {
-      document.removeEventListener('keydown', handleEsc);
+      document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
+      previouslyFocused.current?.focus?.();
     };
   }, [isOpen, onClose]);
 
@@ -54,18 +83,27 @@ export default function ProjectModal({ project, isOpen, onClose }) {
           style={{ backgroundColor: 'var(--color-overlay)', backdropFilter: 'blur(8px)' }}
         >
           <motion.div
+            ref={modalRef}
             variants={modalVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
             onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-modal-title"
+            tabIndex={-1}
             className="glass-card rounded-2xl p-8 max-w-2xl w-full max-h-[85vh] overflow-y-auto"
             style={{ transform: 'none' }}
           >
             {/* Header */}
             <div className="flex items-start justify-between mb-6">
               <div>
-                <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--color-accent)' }}>
+                <h2
+                  id="project-modal-title"
+                  className="text-2xl font-bold mb-2"
+                  style={{ color: 'var(--color-accent)' }}
+                >
                   {project.title}
                 </h2>
                 {project.featured && (
@@ -84,6 +122,7 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                 whileHover={{ scale: 1.1, rotate: 90 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={onClose}
+                aria-label="Close project details"
                 className="p-2 rounded-lg"
                 style={{
                   backgroundColor: 'rgba(var(--color-primary-rgb), 0.1)',

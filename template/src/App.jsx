@@ -22,6 +22,8 @@ import aboutMe from './data/aboutMe.json';
 import awards from './data/awards.json';
 import education from './data/education.json';
 import projects from './data/projects.json';
+import stats from './data/stats.json';
+import highlights from './data/highlights.json';
 
 const SECTION_MAP = {
   about: { component: About, props: { aboutMe } },
@@ -135,10 +137,10 @@ const App = () => {
 
       <main className="flex-1 relative z-10">
         <div ref={(el) => (sectionRefs.current['hero'] = el)}>
-          <Hero config={config} />
+          <Hero config={config} stats={stats} />
         </div>
 
-        <BentoGrid />
+        {config.bentoGrid?.enabled !== false && <BentoGrid highlights={highlights} />}
 
         {enabledSections.map((section) => (
           <div key={section.id} ref={(el) => (sectionRefs.current[section.id] = el)}>

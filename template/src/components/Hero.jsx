@@ -2,15 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Linkedin, Mail, Github, BookOpen, ArrowDown } from 'lucide-react';
 
-const DEFAULT_TITLES = [
-  'Senior Architect at DevOn',
-  'AI Automation Architect',
-  'Quality Engineer → Architect',
-  'Scrum Master (PSM I, CSM)',
-  'Building Intelligent Workflows',
-  '11 Years in QE',
-  'Workflow Architect',
-];
+const DEFAULT_TITLES = ['Your Title 1', 'Your Title 2', 'Your Title 3'];
 
 const floatingOrb = {
   animate: {
@@ -58,19 +50,7 @@ function AnimatedCounter({ end, suffix = '', duration = 2 }) {
   );
 }
 
-const stats = [
-  { value: 11, suffix: '+', label: 'Years Experience', sublabel: 'QE to Architect' },
-  { value: 90, suffix: '%', label: 'Efficiency Gains', sublabel: 'Via automation' },
-  {
-    value: 7,
-    suffix: '',
-    label: 'Certifications',
-    sublabel: 'PSM I, CSM, Azure AI, DevOps & more',
-  },
-  { value: 16, suffix: '+', label: 'Articles Published', sublabel: 'On Medium' },
-];
-
-export default function Hero({ config }) {
+export default function Hero({ config, stats = [] }) {
   const titles = config?.titles || DEFAULT_TITLES;
   const [titleIndex, setTitleIndex] = useState(0);
   const [displayText, setDisplayText] = useState(titles[0]);
@@ -260,39 +240,41 @@ export default function Hero({ config }) {
           </motion.div>
 
           {/* Stats with Animated Counters */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-4 w-full max-w-3xl"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.1 + index * 0.1 }}
-                whileHover={{ y: -4, scale: 1.03 }}
-                className="glass-card rounded-xl p-4 text-center cursor-default"
-              >
-                <p
-                  className="text-2xl md:text-3xl font-extrabold"
-                  style={{ color: 'var(--color-primary)' }}
+          {stats.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.6 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-4 w-full max-w-3xl"
+            >
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.1 + index * 0.1 }}
+                  whileHover={{ y: -4, scale: 1.03 }}
+                  className="glass-card rounded-xl p-4 text-center cursor-default"
                 >
-                  <AnimatedCounter end={stat.value} suffix={stat.suffix} />
-                </p>
-                <p
-                  className="text-xs font-semibold mt-1"
-                  style={{ color: 'var(--color-text-primary)' }}
-                >
-                  {stat.label}
-                </p>
-                <p className="text-[10px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
-                  {stat.sublabel}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
+                  <p
+                    className="text-2xl md:text-3xl font-extrabold"
+                    style={{ color: 'var(--color-primary)' }}
+                  >
+                    <AnimatedCounter end={stat.value} suffix={stat.suffix} />
+                  </p>
+                  <p
+                    className="text-xs font-semibold mt-1"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
+                    {stat.label}
+                  </p>
+                  <p className="text-[10px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
+                    {stat.sublabel}
+                  </p>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
         </div>
       </div>
 

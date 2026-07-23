@@ -1,0 +1,6 @@
+[
+  { "value": 5, "suffix": "+", "label": "Years Experience", "sublabel": "Building software" },
+  { "value": 20, "suffix": "+", "label": "Projects Shipped", "sublabel": "Personal & production" },
+  { "value": 10, "suffix": "+", "label": "Technologies", "sublabel": "Across the stack" },
+  { "value": 100, "suffix": "%", "label": "Remote Friendly", "sublabel": "Open to opportunities" }
+]

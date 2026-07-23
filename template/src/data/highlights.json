@@ -1,0 +1,33 @@
+{
+  "cards": [
+    {
+      "icon": "Code2",
+      "label": "What I Build",
+      "value": "Your Focus Area",
+      "description": "One-line description of the kind of work you do",
+      "color": "#8b5cf6"
+    },
+    {
+      "icon": "Briefcase",
+      "label": "What I Do",
+      "value": "Your Role",
+      "description": "A short description of your day-to-day",
+      "color": "#10b981"
+    },
+    {
+      "icon": "Clock",
+      "label": "Experience",
+      "value": "X Years",
+      "description": "A brief note on your background",
+      "color": "#f59e0b"
+    },
+    {
+      "icon": "Zap",
+      "label": "Focus",
+      "value": "Your Specialty",
+      "description": "What you're focused on right now",
+      "color": "#ec4899"
+    }
+  ],
+  "tools": ["Tool 1", "Tool 2", "Tool 3", "Tool 4", "Tool 5", "Tool 6"]
+}

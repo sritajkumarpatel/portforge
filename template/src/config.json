@@ -26,6 +26,9 @@
     },
     { "id": "education", "label": "08 — Education", "navLabel": "Education", "enabled": true }
   ],
+  "bentoGrid": {
+    "enabled": true
+  },
   "theme": {
     "primary": "slate",
     "accent": "amber",

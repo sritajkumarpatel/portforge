@@ -158,6 +158,15 @@ Ask if they have any to add. Update awards.json, certifications.json.
 ### Education
 Degree, institution, period, focus areas. Update education.json.
 
+### Highlights & Stats (the row under the hero)
+Ask: *"Want a quick-glance highlights row under your hero (4 stat-style cards + a 'daily tools' strip)? You can skip this."*
+
+If yes: ask for 4 short highlights (icon from Code2/Briefcase/Zap/Clock/Monitor/Cpu/Brain/Shield/Terminal/Users, label, value, one-line description, accent color) and a list of tools/technologies you use daily. Update `highlights.json`.
+
+Also ask for 4 numbers worth bragging about (e.g. years of experience, projects shipped) for the animated counters in the hero. Update `stats.json`. Leave `stats.json` as an empty array `[]` if they'd rather not show counters.
+
+If they say no to the whole section, set `bentoGrid.enabled` to `false` in config.json — the section won't render.
+
 ---
 
 ## Step 14: SEO & Deploy Config
