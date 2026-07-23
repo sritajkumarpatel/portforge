@@ -22,4 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-_demo/
+
+# Generated portfolio projects (created by AI_SETUP.md into ./{project-name}/)
+# Default name is my-portfolio; any custom name is appended below by the setup agent.
+/my-portfolio/

@@ -4,10 +4,9 @@
 
 ### AI-Powered React Portfolio Builder
 
-**Talk to an AI agent. Answer 10 questions. Get a production-ready portfolio in 5 minutes.**
+**Talk to an AI agent — paste your LinkedIn/resume or just answer a few questions — and get a production-ready portfolio in minutes.**
 
 [![CI](https://img.shields.io/github/actions/workflow/status/sritajkumarpatel/portforge/ci.yml?branch=main&style=flat-square)](https://github.com/sritajkumarpatel/portforge/actions)
-[![npm](https://img.shields.io/npm/v/portforge?style=flat-square)](https://www.npmjs.com/package/portforge)
 [![GitHub stars](https://img.shields.io/github/stars/sritajkumarpatel/portforge?style=flat-square)](https://github.com/sritajkumarpatel/portforge/stargazers)
 [![GitHub release](https://img.shields.io/github/v/release/sritajkumarpatel/portforge?style=flat-square)](https://github.com/sritajkumarpatel/portforge/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
@@ -17,7 +16,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-0055FF?style=flat-square&logo=framer)](https://www.framer.com/motion/)
 
-[Try the Demo](https://github.com/sritajkumarpatel/portforge#demo) · [Quick Start](#quick-start) · [Features](#features) · [Deploy](#deploy) · [Docs](AI_SETUP.md)
+[Quick Start](#quick-start) · [Features](#features) · [Deploy](#deploy) · [Docs](AI_SETUP.md)
 
 ---
 
@@ -36,14 +35,15 @@ You're a developer. You need a portfolio to get hired, land clients, or showcase
 
 ## The Solution
 
-PortForge is different. You don't build a portfolio — you **have a conversation** with an AI coding agent. The agent asks you 10–15 questions about your experience, projects, skills, and preferences. After each answer, it edits the data files in real time. Five minutes later, you have a fully personalized, production-ready portfolio website.
+PortForge is different. You don't build a portfolio — you **have a conversation** with an AI coding agent. It asks your name, then offers to speed things up with your LinkedIn export and/or resume (both optional — skip them and it'll just ask questions instead). Either way, it walks you through the rest, editing the data files in real time as you answer. Five minutes later, you have a fully personalized, production-ready portfolio website — built only from what you actually told it, nothing invented.
 
 ```
 You: "Set up my portfolio"
-Agent: "Great! Pick a visual style: Minimal, Bold, or Terminal?"
-You: "Terminal"
-Agent: "Want to import your LinkedIn profile?"
+Agent: "Hey! What's your name?"
+You: "Alex Rivera"
+Agent: "Want to paste your LinkedIn export or resume to speed this up? Totally optional."
 You: "Sure — here it is..."
+Agent: "Got it — 3 companies, 5 skill areas, no projects listed yet. Let's cover those, then pick a look."
 ... 5 minutes later ...
 Agent: "Your portfolio is ready at ./my-portfolio/"
 ```
@@ -55,8 +55,8 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 | | Self-built Portfolio | PortForge |
 |---|---|---|
 | **Setup time** | 2–4 weeks | 5 minutes |
-| **Design uniqueness** | You design it (or copy someone) | 3 themes × 7 color presets × custom hex |
-| **Content structure** | Build it yourself | 8 pre-built sections + LinkedIn import |
+| **Design uniqueness** | You design it (or copy someone) | 6 site structures × 5 visual styles × 7 color presets × custom hex |
+| **Content structure** | Build it yourself | 8 pre-built sections + LinkedIn/resume import |
 | **Animations & UX** | Hours of Framer Motion work | Scroll reveals, orbs, glass cards included |
 | **SEO** | Manual meta tags, OG, JSON-LD | Built-in: Open Graph, Twitter Cards, sitemap |
 | **Deployment** | Research + configure hosting | Netlify/Vercel/GitHub Pages configs included |
@@ -78,10 +78,26 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 | **Certifications** | Grid with optional issuer logos and dates |
 | **Education** | Cards with degree, institution, period, focus tags |
 
+### Portfolio Structures
+
+Not just a color swap — 6 genuinely different site shapes:
+
+| Structure | What's different |
+|---|---|
+| **Scroll** (default) | One page, sections stacked, nav scrolls to each |
+| **Bento** | Compact hero + a dashboard grid of section cards — click one to open it, nothing scrolls |
+| **Case Study** | Projects lead immediately after the hero; everything else collapses into a secondary accordion |
+| **Resume** | Same as Scroll but denser — no background animation, no highlights strip, tighter spacing |
+| **Terminal** | A real simulated command-line shell (`help`, `about`, `projects`, `open <n>`, ...) instead of a webpage |
+| **Multi-Page** | Separate routed pages (Home, Projects, Experience, ...) instead of one scrolling page |
+
 ### Visual Customization
 
-- **3 visual styles** — Minimal (clean/professional), Bold (high contrast/dramatic), Terminal (monospace/CRT retro)
-- **7 color presets** — Slate-Amber, Indigo-Violet, Emerald-Teal, Rose-Fuchsia, Blue-Cyan, Purple-Pink, Indigo-Amber
+- **5 visual styles** — Minimal (clean/professional), Bold (high contrast/dramatic), Terminal (monospace/CRT retro), Editorial (serif, calm, text-first), Brutalist (stark, raw, sharp-edged)
+- **4 hero layouts** — center-profile, left-profile, full-image, text-only
+- **3 navigation styles** — scroll, tabs, timeline
+- **Describe-your-vibe mode** — skip the menus and just describe the look you want in your own words; the agent maps it to real settings and confirms before applying anything
+- **7 color presets** — Slate-Amber, Indigo-Violet, Emerald-Teal, Rose-Fuchsia, Blue-Cyan, Slate-Cyan, Indigo-Amber
 - **Custom colors** — any hex values for primary, accent, and background
 - **Dark / Light mode** — toggleable, persisted to localStorage
 
@@ -94,25 +110,21 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 
 ### Developer Experience
 
-- **LinkedIn auto-import** — paste your LinkedIn profile text, get JSON files generated automatically
+- **LinkedIn & resume import** — paste either (or both) and the agent reads them itself and fills in real content; both are optional, and nothing is ever invented to fill a gap — it asks instead
 - **SEO-ready** — Open Graph tags, Twitter Cards, JSON-LD structured data, sitemap.xml, robots.txt
 - **One-command deploy** — GitHub Pages, Netlify, or Vercel with included configs
 - **Zero lock-in** — plain React + Vite + JSON data files. Take it anywhere.
 
-## Roadmap
+## Design Examples & Structures
 
-- [x] LinkedIn profile auto-import
-- [x] 3 visual themes (Minimal, Bold, Terminal)
-- [x] 7 color presets + custom hex colors
-- [x] 8 configurable content sections
-- [x] Dark/light mode with persistence
-- [x] 1-click deploy (Netlify, Vercel, GitHub Pages)
-- [ ] Screenshot / GIF demo in README
-- [ ] Tabbed and timeline navigation modes
-- [ ] More hero layouts (left-profile, full-image)
-- [ ] Data schema validation (JSON Schema or Zod)
-- [ ] Component unit tests (Vitest + Testing Library)
-- [ ] VS Code extension for visual config editing
+PortForge builds genuinely different-looking sites, not just recolored templates — 6 portfolio structures × 5 visual styles × 7 color presets × custom hex, or just describe a vibe and let the agent configure it. Two real examples generated by PortForge:
+
+| **Terminal Structure** | **Editorial Style** |
+|:---:|:---:|
+| ![Terminal CLI Shell](images/terminal-cli.png) | ![Editorial Style](images/editorial-style.png) |
+| *A real simulated command shell — `help`, `projects`, `open <n>`, all reading real content* | *Serif typography, calm paper palette, tabs navigation* |
+
+<!-- More structures (bento, case-study, brutalist, multi-page, vibe-mode) — add screenshots to images/ and drop them in here as they're captured. -->
 
 ## Tech Stack
 
@@ -124,33 +136,31 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 | **Framer Motion** | 11 | Animations |
 | **Lucide React** | 0.400 | Icons |
 | **react-icons** | 5 | Brand / tech logos |
+| **react-router-dom** | 6 | Routing for the multi-page structure |
 
 ## Quick Start
 
 ### Option 1: AI Agent Setup (Recommended)
 
 ```bash
-npx create-portforge my-portfolio
-cd my-portfolio && npm run dev
+git clone https://github.com/sritajkumarpatel/portforge.git
+cd portforge
 ```
 
-Or open an existing directory with your AI coding agent:
+Open the repo (not the `template/` folder — the agent needs `AI_SETUP.md` alongside it) with your AI coding agent:
 
 ```bash
-# Copy the template
-cp -r template my-portfolio
-cd my-portfolio
-
-# Open with your AI agent
-opencode .
-# or: claude .
+claude .
+# or: opencode .
 # or: code . (with Copilot Codex)
 
 # Then say:
 "Set up my portfolio"
 ```
 
-The agent will walk you through every step — no manual config required.
+In Claude Code specifically, you can also run **`/setup-portfolio`**.
+
+The agent copies `template/` into its own project folder and walks you through every step from there — your clone of this repo is left untouched. No manual config required.
 
 ### Option 2: Manual Setup
 
@@ -162,39 +172,29 @@ npm install
 npm run dev
 ```
 
-## Demo
-
-Watch PortForge build a complete portfolio automatically with dummy data:
-
-```bash
-npm run demo
-cd _demo
-opencode .
-# Say: "set up my portfolio"
-```
-
-The agent auto-fills everything using sample data ("Alex Rivera", full-stack engineer) — you just watch it build.
-
-```bash
-npm run demo-clean  # Clean up when done
-```
-
 ## Project Structure
 
 ```
 portforge/
-├── AI_SETUP.md              # Agent instructions (the engine)
-├── scripts/
-│   └── import-linkedin.js   # LinkedIn profile → JSON parser
+├── AI_SETUP.md              # Agent orchestrator — entry point (the engine)
+├── setup/                   # Step-by-step instructions the orchestrator hands off to
+│   ├── content-schema.md    # What every JSON file needs, and where each field should come from
+│   ├── 01-welcome-and-intake.md
+│   ├── 02-extract-from-sources.md
+│   ├── 03-manual-questions.md
+│   ├── 04-design-preferences.md
+│   └── 05-finalize.md
 ├── template/                # Portfolio template (copy this)
 │   ├── public/
 │   │   ├── robots.txt
 │   │   └── sitemap.xml
 │   ├── src/
-│   │   ├── components/      # 18 React components (Hero, About, Experience, etc.)
-│   │   ├── themes/          # Visual style CSS (minimal/bold/terminal)
+│   │   ├── components/      # React components (Hero, About, Experience, etc.)
+│   │   ├── structures/      # The 6 portfolio structures (scroll, bento, case-study, ...)
+│   │   ├── themes/          # Visual style CSS (minimal/bold/terminal/editorial/brutalist)
 │   │   ├── data/            # JSON content files (edit these)
 │   │   ├── context/         # ThemeContext (dark/light, color presets)
+│   │   ├── hooks/           # Shared hooks (e.g. useFocusTrap)
 │   │   ├── config.json      # Central configuration
 │   │   ├── App.jsx
 │   │   └── index.css
@@ -217,6 +217,8 @@ npm run deploy
 # Netlify — connect your repo, netlify.toml is included
 # Vercel — connect your repo, vercel.json is included
 ```
+
+Works the same regardless of which [portfolio structure](#portfolio-structures) you picked — including **multi-page**, which uses hash-based routing specifically so it needs no server-side rewrite rules on any of these hosts.
 
 ## Contributing
 

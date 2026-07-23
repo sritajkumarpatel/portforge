@@ -1,8 +1,11 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import config from './config.json';
 import Nav from './components/Nav';
-import Hero from './components/Hero';
-import BentoGrid from './components/BentoGrid';
+import ScrollStructure from './structures/ScrollStructure';
+import DashboardStructure from './structures/DashboardStructure';
+import CaseStudyStructure from './structures/CaseStudyStructure';
+import TerminalStructure from './structures/TerminalStructure';
+import RoutedStructure from './structures/RoutedStructure';
 import Certifications from './components/Certifications';
 import certifications from './data/certifications.json';
 import Experience from './components/Experience';
@@ -22,6 +25,8 @@ import aboutMe from './data/aboutMe.json';
 import awards from './data/awards.json';
 import education from './data/education.json';
 import projects from './data/projects.json';
+import stats from './data/stats.json';
+import highlights from './data/highlights.json';
 
 const SECTION_MAP = {
   about: { component: About, props: { aboutMe } },
@@ -38,11 +43,19 @@ const SECTION_MAP = {
 };
 
 const enabledSections = (config.sections || []).filter((s) => s.enabled !== false);
+const navStyle = config.theme?.navStyle || 'scroll';
+const isTabsNav = navStyle === 'tabs';
+const structure = config.theme?.portfolioStructure || 'scroll';
+// Structures that are one long/anchored page benefit from section links in the nav;
+// dashboard/gallery-style structures manage their own internal navigation instead.
+const showSectionLinks = structure === 'scroll' || structure === 'resume';
 
 const App = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState(() =>
+    isTabsNav ? enabledSections[0]?.id || 'hero' : 'hero',
+  );
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRefs = useRef({});
 
@@ -57,6 +70,10 @@ const App = () => {
   }, []);
 
   const scrollToSection = useCallback((sectionId) => {
+    if (isTabsNav) {
+      setActiveSection(sectionId);
+      return;
+    }
     const element = sectionRefs.current[sectionId];
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -71,6 +88,8 @@ const App = () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setScrollProgress(progress);
+
+      if (isTabsNav) return;
 
       const offsets = sectionIds.map((id) => {
         const el = sectionRefs.current[id];
@@ -122,29 +141,130 @@ const App = () => {
     return <Component {...props} />;
   };
 
+  const getSectionTeaser = (sectionId) => {
+    switch (sectionId) {
+      case 'about':
+        return aboutMe?.shortBio || 'A bit about me';
+      case 'experience':
+        return experience.length
+          ? `${experience.length} role${experience.length > 1 ? 's' : ''} — most recently ${experience[0]?.company || ''}`
+          : 'Work history';
+      case 'tech':
+        return techStacks?.expertise?.length
+          ? `${techStacks.expertise.length} skill area${techStacks.expertise.length > 1 ? 's' : ''}`
+          : 'Skills & tools';
+      case 'articles':
+        return mediumArticles.length
+          ? `${mediumArticles.length} article${mediumArticles.length > 1 ? 's' : ''}`
+          : 'Writing';
+      case 'projects':
+        return projects.length
+          ? `${projects.length} project${projects.length > 1 ? 's' : ''}`
+          : 'Things I have built';
+      case 'awards':
+        return awards.length
+          ? `${awards.length} award${awards.length > 1 ? 's' : ''}`
+          : 'Recognition';
+      case 'certifications':
+        return certifications.length
+          ? `${certifications.length} certification${certifications.length > 1 ? 's' : ''}`
+          : 'Certifications';
+      case 'education':
+        return education[0]?.degree || 'Education';
+      default:
+        return '';
+    }
+  };
+
+  if (structure === 'terminal') {
+    return (
+      <>
+        <TerminalStructure
+          config={config}
+          aboutMe={aboutMe}
+          experience={experience}
+          techStacks={techStacks}
+          projects={projects}
+          education={education}
+          awards={awards}
+          certifications={certifications}
+          onOpenProject={handleOpenModal}
+        />
+        <ProjectModal project={selectedProject} isOpen={isModalOpen} onClose={handleCloseModal} />
+      </>
+    );
+  }
+
+  if (structure === 'multi-page') {
+    return (
+      <>
+        <RoutedStructure
+          config={config}
+          stats={stats}
+          enabledSections={enabledSections}
+          renderSection={renderSection}
+        />
+        <ProjectModal project={selectedProject} isOpen={isModalOpen} onClose={handleCloseModal} />
+      </>
+    );
+  }
+
   return (
-    <div className="min-h-screen flex flex-col bg-bg-primary text-text-primary relative">
-      <AnimatedBackground />
+    <div
+      className={`min-h-screen flex flex-col bg-bg-primary text-text-primary relative ${structure === 'resume' ? 'resume-mode' : ''}`}
+    >
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:rounded-lg focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
+        style={{ backgroundColor: 'var(--color-primary)', color: 'var(--color-bg-primary)' }}
+      >
+        Skip to content
+      </a>
+
+      {structure !== 'resume' && <AnimatedBackground />}
 
       <Nav
         activeSection={activeSection}
         scrollToSection={scrollToSection}
         config={config}
         scrollProgress={scrollProgress}
+        navStyle={navStyle}
+        showSectionLinks={showSectionLinks}
       />
 
-      <main className="flex-1 relative z-10">
-        <div ref={(el) => (sectionRefs.current['hero'] = el)}>
-          <Hero config={config} />
-        </div>
-
-        <BentoGrid />
-
-        {enabledSections.map((section) => (
-          <div key={section.id} ref={(el) => (sectionRefs.current[section.id] = el)}>
-            {renderSection(section.id)}
-          </div>
-        ))}
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className={`flex-1 relative z-10 ${navStyle === 'timeline' && showSectionLinks ? 'md:pl-56' : ''}`}
+      >
+        {structure === 'bento' ? (
+          <DashboardStructure
+            config={config}
+            stats={stats}
+            enabledSections={enabledSections}
+            renderSection={renderSection}
+            getSectionTeaser={getSectionTeaser}
+          />
+        ) : structure === 'case-study' ? (
+          <CaseStudyStructure
+            config={config}
+            stats={stats}
+            enabledSections={enabledSections}
+            renderSection={renderSection}
+          />
+        ) : (
+          <ScrollStructure
+            config={config}
+            stats={stats}
+            highlights={highlights}
+            enabledSections={enabledSections}
+            sectionRefs={sectionRefs}
+            isTabsNav={isTabsNav}
+            activeSection={activeSection}
+            renderSection={renderSection}
+            compact={structure === 'resume'}
+          />
+        )}
       </main>
 
       <Footer config={config} />

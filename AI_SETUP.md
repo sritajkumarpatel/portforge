@@ -1,196 +1,26 @@
 # PortForge — AI Portfolio Builder
 
-Created by [Sritaj Patel](https://github.com/sritajkumarpatel).  
+Created by [Sritaj Patel](https://github.com/sritajkumarpatel).
 Repo: [github.com/sritajkumarpatel/portforge](https://github.com/sritajkumarpatel/portforge)
 
-You are setting up a portfolio website for the user. The `template/` directory contains a complete React + Vite portfolio with placeholder content.
+You are a setup agent helping someone create a personal portfolio website. `template/` contains a complete React + Vite portfolio with placeholder content — you'll copy it out and personalize it through conversation. Ask one question at a time; don't dump a form at the user.
 
-Guide the user through setup. Ask **one question at a time**. After each answer, update the relevant files. At the end, tell the user the project is ready at `./{project-name}/`.
+## The one rule that matters most
 
----
+**Never invent a fact.** Not a date, not a company name, not a stat, not a claimed achievement. If it isn't in something the user gave you — pasted text, or a direct answer to a question — it doesn't go in the portfolio. When in doubt, ask; don't guess. This applies at every step below, not just during extraction.
 
-## Step 1: Your Name & Project Name
+## Work through these files in order
 
-Ask: *"What's your name? I'll use it to personalize your portfolio."*
+Each file hands off to the next — follow its instructions fully before moving on, and don't skip ahead.
 
-Then ask: *"What should your portfolio project be called? (default: my-portfolio)"*
+| Step | File | What happens |
+|---|---|---|
+| 1 | [`setup/01-welcome-and-intake.md`](setup/01-welcome-and-intake.md) | Greet the user, get their name and project folder name, offer to import from LinkedIn/resume (both optional) |
+| 2a | [`setup/02-extract-from-sources.md`](setup/02-extract-from-sources.md) | **Only if** LinkedIn or resume text was pasted — read it yourself and extract real content from it, confirm with the user before writing anything |
+| 2b / 3 | [`setup/03-manual-questions.md`](setup/03-manual-questions.md) | Ask for whatever content wasn't covered — either everything (if both sources were skipped) or just the remaining gaps after extraction |
+| 4 | [`setup/04-design-preferences.md`](setup/04-design-preferences.md) | Visual style, navigation style, hero layout, color theme, section order |
+| 5 | [`setup/05-finalize.md`](setup/05-finalize.md) | SEO, deploy config, install, build, hand the project back to the user |
 
-```bash
-cp -r template ./{project-name}
-```
+[`setup/content-schema.md`](setup/content-schema.md) is the reference both the extraction step and the manual-question step draw from — it defines exactly what every `config.json` / `src/data/*.json` file needs, and tags each field as a fact (must come from a real source), a draft (you may propose it, user must approve), or something you should just ask about directly. Keep it open while working through content — don't guess a field shape or an icon name, check it there.
 
-All subsequent edits go into `./{project-name}/`.
-
-Update `./{project-name}/vite.config.js` — set the `base` to `/{project-name}/`.
-
----
-
-## Step 2: Import from LinkedIn (Optional)
-
-Ask: *"Do you have your LinkedIn profile text handy? I can import your data automatically."*
-
-If yes:
-1. Ask them to paste their LinkedIn text
-2. Save it to a temp file and run:
-   ```bash
-   node ../scripts/import-linkedin.js ./{project-name}
-   ```
-   (Pipe the text or pass it via stdin)
-3. Verify the generated files look correct
-4. Skip Steps 6-13 (the script handles those), just do Steps 3-5 and 14-15
-
----
-
-## Step 3: Visual Style
-
-Ask: *"Pick a visual style:"*
-
-Show these options:
-
-| Style | Vibe | Best For |
-|-------|------|----------|
-| **Minimal** | Clean, subtle, professional | Default — works for everyone |
-| **Bold** | High contrast, dramatic, large typography | Creative roles, leadership |
-| **Terminal** | Monospace, green-on-black, retro CRT | Engineers, dev tools, tech-forward |
-
-For **Minimal**: Copy themes/minimal.css → themes/active.css
-For **Bold**: Copy themes/bold.css → themes/active.css
-For **Terminal**: Copy themes/terminal.css → themes/active.css
-
-Also update config.json → `theme.visualStyle`.
-
----
-
-## Step 4: Navigation Style
-
-Ask: *"How should navigation work?"*
-
-Options:
-- **scroll** — Single page, sections flow vertically (default)
-- **tabs** — Tab bar switches between sections
-- **timeline** — Vertical timeline layout
-
----
-
-## Step 5: Hero Layout
-
-Ask: *"How should the hero section look?"*
-
-Options:
-- **center-profile** — Photo, name, titles centered (default)
-- **left-profile** — Photo left, text right
-- **full-image** — Full background image with overlay
-
----
-
-## Step 6: Color Theme
-
-Show the presets:
-| Preset | Primary | Accent |
-|--------|---------|--------|
-| slate-amber | Slate | Amber |
-| indigo-violet | Indigo | Violet |
-| emerald-teal | Emerald | Teal |
-| rose-fuchsia | Rose | Fuchsia |
-| blue-cyan | Blue | Cyan |
-| purple-pink | Purple | Pink |
-
-Also ask if they want custom colors:
-- *"Want custom colors? I can set any hex values for primary, accent, and background."*
-- If yes, ask for hex values and set `theme.customTheme` in config.json
-- Then update `themes/active.css` with the custom color values
-
-Also ask: *"Dark mode or light mode?"*
-
----
-
-## Step 7: Sections
-
-Ask: *"Which sections do you want?"*
-
-Default sections:
-1. About
-2. Experience
-3. Skills
-4. Articles / Blog
-5. Projects
-6. Awards
-7. Certifications
-8. Education
-
-Let them enable/disable and reorder. Update `sections[]` in config.json.
-
----
-
-## Steps 8-13: Fill Content
-
-(If LinkedIn import wasn't used, ask one section at a time.)
-
-### Personal Info
-Ask for: name (unless already provided in Step 1), email, headline, tagline, GitHub, LinkedIn, Medium.
-Update config.json, index.html (title + description).
-
-Update `vite.config.js` — set `base` to `/<github-username>/<repo-name>/` if deploying to GitHub Pages, or `/{project-name}/` otherwise.
-
-### Bio / About
-Ask for: 2-3 paragraph bio, 4 expertise pillars (with 3-4 capabilities each), philosophy.
-Update aboutMe.json.
-
-### Experience
-For each company: name, location, roles (title + period), 3-5 highlights.
-Update experience.json.
-
-### Skills
-For each domain: name, icon (Brain/Shield/Terminal/Users/Code2), color, categories with skills.
-Update techStacks.json.
-
-### Projects
-For each project: title, description, technologies, features, link, featured flag.
-Update projects.json.
-
-### Articles (Optional)
-Title, URL, topic (AI & LLM / Testing / Leadership / Development), read time, date.
-Update mediumArticles.json.
-
-### Awards & Certifications (Optional)
-Ask if they have any to add. Update awards.json, certifications.json.
-
-### Education
-Degree, institution, period, focus areas. Update education.json.
-
----
-
-## Step 14: SEO & Deploy Config
-
-Update `index.html` with:
-- Meta description
-- Open Graph tags
-- Twitter Card tags
-- JSON-LD structured data
-
-Update `vite.config.js` — ensure `base` is set correctly for deployment (e.g. `/<repo-name>/` for GitHub Pages, or `/` for custom domain / user site).
-
-The template already has `netlify.toml`, `vercel.json`, `robots.txt`, `sitemap.xml`. Update the domain placeholder in `robots.txt` and `sitemap.xml`.
-
----
-
-## Step 15: Finalize
-
-```bash
-cd ./{project-name}
-npm install
-npm run build
-```
-
-Verify the build succeeds. Tell the user:
-*"Your portfolio is ready at `./{project-name}/`. Run `cd {project-name} && npm run dev` to preview, or `npm run build` to publish. Deploy to Netlify by connecting your GitHub repo, or to Vercel with one click."*
-
----
-
-## Notes for the Agent
-
-- All user content goes in `src/*.json` files. Never edit React components.
-- The `src/themes/active.css` controls the visual style. Replace it entirely when changing styles.
-- Validate JSON syntax after every edit.
-- Run `npm run build` at the end to confirm the project compiles.
-- The LinkedIn import script (scripts/import-linkedin.js) generates JSON from raw LinkedIn text.
+There's no separate import script to run: reading and understanding the pasted LinkedIn/resume text *is* the extraction step, done by you, in `02-extract-from-sources.md`.

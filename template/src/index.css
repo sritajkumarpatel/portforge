@@ -139,7 +139,7 @@ nav {
   box-shadow: var(--color-nav-shadow);
   backdrop-filter: blur(12px);
 }
-nav h1 {
+nav .nav-brand {
   letter-spacing: 0.4px;
   font-weight: 800;
   font-size: 1.25rem;
@@ -254,6 +254,36 @@ html:not(.dark) .glass-card:hover {
   box-shadow: 0 8px 30px rgba(100, 80, 50, 0.12);
 }
 
-html:not(.dark) nav h1 {
+html:not(.dark) nav .nav-brand {
   color: var(--color-accent);
+}
+
+/* Resume/dense structure: tighter rhythm, flatter cards, no decorative lift on hover */
+.resume-mode section {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.resume-mode .glass-card {
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.resume-mode .glass-card:hover {
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
 }

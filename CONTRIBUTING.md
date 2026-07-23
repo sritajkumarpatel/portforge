@@ -42,7 +42,8 @@ npm install
 
 ```
 portforge/
-├── AI_SETUP.md          # Agent instruction document
+├── AI_SETUP.md          # Agent orchestrator — entry point
+├── setup/               # Step-by-step agent instructions AI_SETUP.md hands off to
 ├── template/            # Portfolio template (main artifact)
 │   ├── src/
 │   │   ├── components/  # React components
@@ -50,7 +51,6 @@ portforge/
 │   │   ├── themes/      # Visual style CSS
 │   │   └── ...
 │   └── package.json
-├── scripts/             # Utility scripts
 └── package.json
 ```
 

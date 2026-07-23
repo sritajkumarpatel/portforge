@@ -19,12 +19,12 @@ export default function Experience({ experience }) {
         <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
           <Briefcase style={{ color: 'var(--color-primary)' }} size={32} />
         </motion.div>
-        <h3 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+        <h2 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
           <span style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}>
             02
           </span>
           Experience
-        </h3>
+        </h2>
       </div>
 
       {/* Career Summary */}
@@ -114,12 +114,12 @@ export default function Experience({ experience }) {
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
                   <div>
-                    <h4
+                    <h3
                       className="text-xl md:text-2xl font-bold"
                       style={{ color: 'var(--color-primary)' }}
                     >
                       {exp.company}
-                    </h4>
+                    </h3>
                     <div className="flex flex-wrap items-center gap-3 mt-1">
                       <span
                         className="flex items-center gap-1 text-sm"
@@ -179,12 +179,12 @@ export default function Experience({ experience }) {
                 {exp.currentRolesAndResponsibilities &&
                   exp.currentRolesAndResponsibilities.length > 0 && (
                     <div className="mb-4">
-                      <h5
+                      <h4
                         className="text-sm font-semibold mb-2"
                         style={{ color: 'var(--color-primary)' }}
                       >
                         Roles & Responsibilities
-                      </h5>
+                      </h4>
                       <ul className="space-y-1">
                         {exp.currentRolesAndResponsibilities.slice(0, 5).map((item, iIndex) => (
                           <li
@@ -206,12 +206,12 @@ export default function Experience({ experience }) {
                   exp.highlights &&
                   exp.highlights.length > 0 && (
                     <div className="mb-4">
-                      <h5
+                      <h4
                         className="text-sm font-semibold mb-2"
                         style={{ color: 'var(--color-primary)' }}
                       >
                         Highlights
-                      </h5>
+                      </h4>
                       <ul className="space-y-1">
                         {exp.highlights.slice(0, 4).map((highlight, hIndex) => (
                           <li
@@ -230,12 +230,12 @@ export default function Experience({ experience }) {
                 {/* Awards */}
                 {exp.awards && exp.awards.length > 0 && (
                   <div className="pt-4" style={{ borderTop: '1px solid var(--color-border)' }}>
-                    <h5
+                    <h4
                       className="text-sm font-semibold mb-2 flex items-center gap-2"
                       style={{ color: '#fcd34d' }}
                     >
                       Awards
-                    </h5>
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                       {exp.awards.map((award, aIndex) => (
                         <motion.span

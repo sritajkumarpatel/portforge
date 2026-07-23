@@ -27,12 +27,12 @@ export default function Education({ education }) {
         <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
           <GraduationCap style={{ color: 'var(--color-primary)' }} size={32} />
         </motion.div>
-        <h3 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+        <h2 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
           <span style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}>
             08
           </span>
           Education
-        </h3>
+        </h2>
       </div>
 
       <motion.div
@@ -71,9 +71,9 @@ export default function Education({ education }) {
                 </div>
 
                 <div className="flex-1">
-                  <h4 className="font-bold mb-1" style={{ color: 'var(--color-primary)' }}>
+                  <h3 className="font-bold mb-1" style={{ color: 'var(--color-primary)' }}>
                     {item.degree}
-                  </h4>
+                  </h3>
                   <p className="text-sm font-medium mb-2" style={{ color: 'var(--color-accent)' }}>
                     {item.institution}
                   </p>

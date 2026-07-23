@@ -23,10 +23,34 @@ function hexToRgb(hex) {
     : '0, 0, 0';
 }
 
-function getCSSVariables(primary, accent, mode) {
-  const p = themeColors[primary] || themeColors.slate;
-  const a = themeColors[accent] || themeColors.amber;
+function isValidHex(hex) {
+  return typeof hex === 'string' && /^#?[0-9a-f]{6}$/i.test(hex);
+}
+
+function mixHex(hex, target, amount) {
+  const rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!rgb) return hex;
+  const t = target === 'white' ? 255 : 0;
+  const channel = (v) => {
+    const mixed = Math.round(parseInt(v, 16) + (t - parseInt(v, 16)) * amount);
+    return Math.min(255, Math.max(0, mixed)).toString(16).padStart(2, '0');
+  };
+  return `#${channel(rgb[1])}${channel(rgb[2])}${channel(rgb[3])}`;
+}
+
+function resolveHueColor(named, customHex) {
+  if (isValidHex(customHex)) {
+    const hex = customHex.startsWith('#') ? customHex : `#${customHex}`;
+    return { primary: hex, light: mixHex(hex, 'white', 0.25), dark: mixHex(hex, 'black', 0.2) };
+  }
+  return named;
+}
+
+function getCSSVariables(primary, accent, mode, customTheme = {}) {
+  const p = resolveHueColor(themeColors[primary] || themeColors.slate, customTheme.primaryHex);
+  const a = resolveHueColor(themeColors[accent] || themeColors.amber, customTheme.accentHex);
   const isDark = mode === 'dark';
+  const customDarkBg = isDark && isValidHex(customTheme.darkBg) ? customTheme.darkBg : null;
 
   return {
     '--color-primary': p.primary,
@@ -37,9 +61,17 @@ function getCSSVariables(primary, accent, mode) {
     '--color-accent-light': a.light,
     '--color-accent-dark': a.dark,
     '--color-accent-rgb': hexToRgb(a.primary),
-    '--color-bg-primary': isDark ? '#0f1218' : '#f5f0e8',
-    '--color-bg-secondary': isDark ? '#1c2028' : '#ebe5db',
-    '--color-bg-tertiary': isDark ? '#282d38' : '#ddd5c8',
+    '--color-bg-primary': customDarkBg || (isDark ? '#0f1218' : '#f5f0e8'),
+    '--color-bg-secondary': customDarkBg
+      ? mixHex(customDarkBg, 'white', 0.06)
+      : isDark
+        ? '#1c2028'
+        : '#ebe5db',
+    '--color-bg-tertiary': customDarkBg
+      ? mixHex(customDarkBg, 'white', 0.12)
+      : isDark
+        ? '#282d38'
+        : '#ddd5c8',
     '--color-text-primary': isDark ? '#f1f5f9' : '#1a1510',
     '--color-text-secondary': isDark ? '#cbd5e1' : '#3d3529',
     '--color-text-muted': isDark ? '#94a3b8' : '#5c5347',
@@ -95,7 +127,7 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     if (!mounted) return;
     const root = document.documentElement;
-    const vars = getCSSVariables(theme.primary, theme.accent, theme.mode);
+    const vars = getCSSVariables(theme.primary, theme.accent, theme.mode, theme.customTheme);
     Object.entries(vars).forEach(([key, value]) => {
       root.style.setProperty(key, value);
     });
@@ -110,12 +142,18 @@ export function ThemeProvider({ children }) {
   const setPreset = (presetName) => {
     const preset = config.theme.presets[presetName];
     if (preset) {
-      setTheme((prev) => ({ ...prev, ...preset }));
+      setTheme((prev) => ({
+        ...prev,
+        ...preset,
+        customTheme: { primaryHex: '', accentHex: '', darkBg: '' },
+      }));
     }
   };
 
   const setPrimary = (primary) => setTheme((prev) => ({ ...prev, primary }));
   const setAccent = (accent) => setTheme((prev) => ({ ...prev, accent }));
+  const setCustomTheme = (partial) =>
+    setTheme((prev) => ({ ...prev, customTheme: { ...prev.customTheme, ...partial } }));
 
   const value = useMemo(
     () => ({
@@ -124,6 +162,7 @@ export function ThemeProvider({ children }) {
       setPreset,
       setPrimary,
       setAccent,
+      setCustomTheme,
       presets: config.theme.presets,
       mounted,
     }),

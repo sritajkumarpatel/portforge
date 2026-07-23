@@ -29,12 +29,12 @@ export default function Awards({ awards }) {
         <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
           <Trophy style={{ color: '#fcd34d' }} size={32} />
         </motion.div>
-        <h3 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+        <h2 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
           <span style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}>
             06
           </span>
           Awards & Recognition
-        </h3>
+        </h2>
       </div>
 
       <motion.div
@@ -77,9 +77,9 @@ export default function Awards({ awards }) {
                   </motion.div>
 
                   <div className="flex-1">
-                    <h4 className="font-bold mb-1" style={{ color: 'var(--color-primary)' }}>
+                    <h3 className="font-bold mb-1" style={{ color: 'var(--color-primary)' }}>
                       {award.title}
-                    </h4>
+                    </h3>
                     <div className="flex flex-wrap items-center gap-2 mb-2">
                       <span
                         className="text-xs px-2 py-0.5 rounded-full font-medium"

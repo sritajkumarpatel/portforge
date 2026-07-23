@@ -75,7 +75,7 @@ body::before {
     0 0 40px rgba(0, 255, 65, 0.05) !important;
 }
 
-nav h1::before {
+nav .nav-brand::before {
   content: '~/portfolio $ ';
   color: var(--color-accent);
   font-family: 'JetBrains Mono', monospace;
