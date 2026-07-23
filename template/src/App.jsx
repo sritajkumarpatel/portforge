@@ -1,9 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import config from './config.json';
 import Nav from './components/Nav';
-import Hero from './components/Hero';
-import BentoGrid from './components/BentoGrid';
+import ScrollStructure from './structures/ScrollStructure';
 import Certifications from './components/Certifications';
 import certifications from './data/certifications.json';
 import Experience from './components/Experience';
@@ -43,6 +41,10 @@ const SECTION_MAP = {
 const enabledSections = (config.sections || []).filter((s) => s.enabled !== false);
 const navStyle = config.theme?.navStyle || 'scroll';
 const isTabsNav = navStyle === 'tabs';
+const structure = config.theme?.portfolioStructure || 'scroll';
+// Structures that are one long/anchored page benefit from section links in the nav;
+// dashboard/gallery-style structures manage their own internal navigation instead.
+const showSectionLinks = structure === 'scroll' || structure === 'resume';
 
 const App = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -153,43 +155,26 @@ const App = () => {
         config={config}
         scrollProgress={scrollProgress}
         navStyle={navStyle}
+        showSectionLinks={showSectionLinks}
       />
 
       <main
         id="main-content"
         tabIndex={-1}
-        className={`flex-1 relative z-10 ${navStyle === 'timeline' ? 'md:pl-56' : ''}`}
+        className={`flex-1 relative z-10 ${navStyle === 'timeline' && showSectionLinks ? 'md:pl-56' : ''}`}
       >
-        <div ref={(el) => (sectionRefs.current['hero'] = el)}>
-          <Hero config={config} stats={stats} />
-        </div>
-
-        {config.bentoGrid?.enabled !== false && <BentoGrid highlights={highlights} />}
-
-        {isTabsNav ? (
-          <AnimatePresence mode="wait">
-            {activeSection && (
-              <motion.div
-                key={activeSection}
-                id={`panel-${activeSection}`}
-                role="tabpanel"
-                aria-labelledby={`tab-${activeSection}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
-              >
-                {renderSection(activeSection)}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        ) : (
-          enabledSections.map((section) => (
-            <div key={section.id} ref={(el) => (sectionRefs.current[section.id] = el)}>
-              {renderSection(section.id)}
-            </div>
-          ))
-        )}
+        {/* structure === 'bento' | 'case-study' | 'terminal' | 'multi-page' plug in here as they're built */}
+        <ScrollStructure
+          config={config}
+          stats={stats}
+          highlights={highlights}
+          enabledSections={enabledSections}
+          sectionRefs={sectionRefs}
+          isTabsNav={isTabsNav}
+          activeSection={activeSection}
+          renderSection={renderSection}
+          compact={structure === 'resume'}
+        />
       </main>
 
       <Footer config={config} />

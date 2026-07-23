@@ -9,6 +9,7 @@ export default function Nav({
   config,
   scrollProgress,
   navStyle = 'scroll',
+  showSectionLinks = true,
 }) {
   const { theme, toggleMode, setPreset, setCustomTheme, presets, mounted } = useTheme();
   const [showPresets, setShowPresets] = useState(false);
@@ -81,7 +82,7 @@ export default function Nav({
           </motion.button>
 
           <div className="flex items-center gap-2">
-            {!isTimeline && (
+            {!isTimeline && showSectionLinks && (
               <div
                 className="hidden md:flex items-center gap-1"
                 role={isTabs ? 'tablist' : undefined}
@@ -248,7 +249,7 @@ export default function Nav({
         />
       </nav>
 
-      {isTimeline && sectionItems.length > 0 && (
+      {isTimeline && showSectionLinks && sectionItems.length > 0 && (
         <nav
           aria-label="Section timeline"
           className="hidden md:block fixed left-4 top-1/2 -translate-y-1/2 z-40 w-44"

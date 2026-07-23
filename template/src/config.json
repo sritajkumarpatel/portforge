@@ -36,6 +36,7 @@
     "visualStyle": "minimal",
     "heroLayout": "center-profile",
     "navStyle": "scroll",
+    "portfolioStructure": "scroll",
     "presets": {
       "slate-amber": { "primary": "slate", "accent": "amber" },
       "indigo-violet": { "primary": "indigo", "accent": "violet" },
