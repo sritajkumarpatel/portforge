@@ -175,7 +175,9 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-bg-primary text-text-primary relative">
+    <div
+      className={`min-h-screen flex flex-col bg-bg-primary text-text-primary relative ${structure === 'resume' ? 'resume-mode' : ''}`}
+    >
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:rounded-lg focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
@@ -184,7 +186,7 @@ const App = () => {
         Skip to content
       </a>
 
-      <AnimatedBackground />
+      {structure !== 'resume' && <AnimatedBackground />}
 
       <Nav
         activeSection={activeSection}

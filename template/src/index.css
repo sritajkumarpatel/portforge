@@ -258,6 +258,21 @@ html:not(.dark) nav .nav-brand {
   color: var(--color-accent);
 }
 
+/* Resume/dense structure: tighter rhythm, flatter cards, no decorative lift on hover */
+.resume-mode section {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.resume-mode .glass-card {
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.resume-mode .glass-card:hover {
+  transform: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
