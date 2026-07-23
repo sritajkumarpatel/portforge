@@ -126,18 +126,6 @@ PortForge builds genuinely different-looking sites, not just recolored templates
 
 <!-- More structures (bento, case-study, brutalist, multi-page, vibe-mode) — add screenshots to images/ and drop them in here as they're captured. -->
 
-## Roadmap
-
-Everything shipped so far is documented in [Features](#features) above — this is only what's next:
-
-- [ ] Screen recording / GIF of the agent building a portfolio live (the screenshots above are static; a couple more structures still need capturing too — see the comment in [Design Examples](#design-examples--structures))
-- [ ] Clean URLs for the multi-page structure (currently uses hash routing — `/#/projects` — to work on any static host with zero deploy config; a `BrowserRouter` option with the matching Netlify/Vercel/GitHub Pages redirect rules is a natural follow-up for anyone who wants clean paths instead)
-- [ ] Data schema validation (JSON Schema or Zod) so a malformed `config.json`/data file fails fast with a clear error instead of a silent render bug
-- [ ] Component unit tests (Vitest + Testing Library)
-- [ ] VS Code extension for visual config editing
-
-Have a suggestion? Open an issue or a discussion — see [Contributing](#contributing).
-
 ## Tech Stack
 
 | Technology | Version | Purpose |
