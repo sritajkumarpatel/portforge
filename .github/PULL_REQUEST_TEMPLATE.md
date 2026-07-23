@@ -17,7 +17,6 @@ Please describe the tests that you ran to verify your changes.
 
 - [ ] Template builds successfully (`cd template && npm run build`)
 - [ ] JSON files are valid (`node -e "JSON.parse(fs.readFileSync(...))"`)
-- [ ] Demo script runs cleanly (`npm run demo && npm run demo-clean`)
 
 ## Checklist:
 

@@ -17,7 +17,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-0055FF?style=flat-square&logo=framer)](https://www.framer.com/motion/)
 
-[Try the Demo](https://github.com/sritajkumarpatel/portforge#demo) · [Quick Start](#quick-start) · [Features](#features) · [Deploy](#deploy) · [Docs](AI_SETUP.md)
+[Quick Start](#quick-start) · [Features](#features) · [Deploy](#deploy) · [Docs](AI_SETUP.md)
 
 ---
 
@@ -36,14 +36,15 @@ You're a developer. You need a portfolio to get hired, land clients, or showcase
 
 ## The Solution
 
-PortForge is different. You don't build a portfolio — you **have a conversation** with an AI coding agent. The agent asks you 10–15 questions about your experience, projects, skills, and preferences. After each answer, it edits the data files in real time. Five minutes later, you have a fully personalized, production-ready portfolio website.
+PortForge is different. You don't build a portfolio — you **have a conversation** with an AI coding agent. It asks your name, then offers to speed things up with your LinkedIn export and/or resume (both optional — skip them and it'll just ask questions instead). Either way, it walks you through the rest, editing the data files in real time as you answer. Five minutes later, you have a fully personalized, production-ready portfolio website — built only from what you actually told it, nothing invented.
 
 ```
 You: "Set up my portfolio"
-Agent: "Great! Pick a visual style: Minimal, Bold, or Terminal?"
-You: "Terminal"
-Agent: "Want to import your LinkedIn profile?"
+Agent: "Hey! What's your name?"
+You: "Alex Rivera"
+Agent: "Want to paste your LinkedIn export or resume to speed this up? Totally optional."
 You: "Sure — here it is..."
+Agent: "Got it — 3 companies, 5 skill areas, no projects listed yet. Let's cover those, then pick a look."
 ... 5 minutes later ...
 Agent: "Your portfolio is ready at ./my-portfolio/"
 ```
@@ -56,7 +57,7 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 |---|---|---|
 | **Setup time** | 2–4 weeks | 5 minutes |
 | **Design uniqueness** | You design it (or copy someone) | 3 themes × 7 color presets × custom hex |
-| **Content structure** | Build it yourself | 8 pre-built sections + LinkedIn import |
+| **Content structure** | Build it yourself | 8 pre-built sections + LinkedIn/resume import |
 | **Animations & UX** | Hours of Framer Motion work | Scroll reveals, orbs, glass cards included |
 | **SEO** | Manual meta tags, OG, JSON-LD | Built-in: Open Graph, Twitter Cards, sitemap |
 | **Deployment** | Research + configure hosting | Netlify/Vercel/GitHub Pages configs included |
@@ -94,14 +95,14 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 
 ### Developer Experience
 
-- **LinkedIn auto-import** — paste your LinkedIn profile text, get JSON files generated automatically
+- **LinkedIn & resume import** — paste either (or both) and the agent reads them itself and fills in real content; both are optional, and nothing is ever invented to fill a gap — it asks instead
 - **SEO-ready** — Open Graph tags, Twitter Cards, JSON-LD structured data, sitemap.xml, robots.txt
 - **One-command deploy** — GitHub Pages, Netlify, or Vercel with included configs
 - **Zero lock-in** — plain React + Vite + JSON data files. Take it anywhere.
 
 ## Roadmap
 
-- [x] LinkedIn profile auto-import
+- [x] LinkedIn & resume auto-import (agent-native, no fabricated data)
 - [x] 3 visual themes (Minimal, Bold, Terminal)
 - [x] 7 color presets + custom hex colors
 - [x] 8 configurable content sections
@@ -130,27 +131,24 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 ### Option 1: AI Agent Setup (Recommended)
 
 ```bash
-npx create-portforge my-portfolio
-cd my-portfolio && npm run dev
+git clone https://github.com/sritajkumarpatel/portforge.git
+cd portforge
 ```
 
-Or open an existing directory with your AI coding agent:
+Open the repo (not the `template/` folder — the agent needs `AI_SETUP.md` alongside it) with your AI coding agent:
 
 ```bash
-# Copy the template
-cp -r template my-portfolio
-cd my-portfolio
-
-# Open with your AI agent
-opencode .
-# or: claude .
+claude .
+# or: opencode .
 # or: code . (with Copilot Codex)
 
 # Then say:
 "Set up my portfolio"
 ```
 
-The agent will walk you through every step — no manual config required.
+In Claude Code specifically, you can also run **`/setup-portfolio`**.
+
+The agent copies `template/` into its own project folder and walks you through every step from there — your clone of this repo is left untouched. No manual config required.
 
 ### Option 2: Manual Setup
 
@@ -162,30 +160,18 @@ npm install
 npm run dev
 ```
 
-## Demo
-
-Watch PortForge build a complete portfolio automatically with dummy data:
-
-```bash
-npm run demo
-cd _demo
-opencode .
-# Say: "set up my portfolio"
-```
-
-The agent auto-fills everything using sample data ("Alex Rivera", full-stack engineer) — you just watch it build.
-
-```bash
-npm run demo-clean  # Clean up when done
-```
-
 ## Project Structure
 
 ```
 portforge/
-├── AI_SETUP.md              # Agent instructions (the engine)
-├── scripts/
-│   └── import-linkedin.js   # LinkedIn profile → JSON parser
+├── AI_SETUP.md              # Agent orchestrator — entry point (the engine)
+├── setup/                   # Step-by-step instructions the orchestrator hands off to
+│   ├── content-schema.md    # What every JSON file needs, and where each field should come from
+│   ├── 01-welcome-and-intake.md
+│   ├── 02-extract-from-sources.md
+│   ├── 03-manual-questions.md
+│   ├── 04-design-preferences.md
+│   └── 05-finalize.md
 ├── template/                # Portfolio template (copy this)
 │   ├── public/
 │   │   ├── robots.txt
