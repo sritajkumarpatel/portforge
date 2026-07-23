@@ -4,6 +4,7 @@ import Nav from './components/Nav';
 import ScrollStructure from './structures/ScrollStructure';
 import DashboardStructure from './structures/DashboardStructure';
 import CaseStudyStructure from './structures/CaseStudyStructure';
+import TerminalStructure from './structures/TerminalStructure';
 import Certifications from './components/Certifications';
 import certifications from './data/certifications.json';
 import Experience from './components/Experience';
@@ -173,6 +174,25 @@ const App = () => {
         return '';
     }
   };
+
+  if (structure === 'terminal') {
+    return (
+      <>
+        <TerminalStructure
+          config={config}
+          aboutMe={aboutMe}
+          experience={experience}
+          techStacks={techStacks}
+          projects={projects}
+          education={education}
+          awards={awards}
+          certifications={certifications}
+          onOpenProject={handleOpenModal}
+        />
+        <ProjectModal project={selectedProject} isOpen={isModalOpen} onClose={handleCloseModal} />
+      </>
+    );
+  }
 
   return (
     <div
