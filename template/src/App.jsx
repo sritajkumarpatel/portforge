@@ -3,6 +3,7 @@ import config from './config.json';
 import Nav from './components/Nav';
 import ScrollStructure from './structures/ScrollStructure';
 import DashboardStructure from './structures/DashboardStructure';
+import CaseStudyStructure from './structures/CaseStudyStructure';
 import Certifications from './components/Certifications';
 import certifications from './data/certifications.json';
 import Experience from './components/Experience';
@@ -199,7 +200,7 @@ const App = () => {
         tabIndex={-1}
         className={`flex-1 relative z-10 ${navStyle === 'timeline' && showSectionLinks ? 'md:pl-56' : ''}`}
       >
-        {/* structure === 'case-study' | 'terminal' | 'multi-page' plug in here as they're built */}
+        {/* structure === 'terminal' | 'multi-page' plug in here as they're built */}
         {structure === 'bento' ? (
           <DashboardStructure
             config={config}
@@ -207,6 +208,13 @@ const App = () => {
             enabledSections={enabledSections}
             renderSection={renderSection}
             getSectionTeaser={getSectionTeaser}
+          />
+        ) : structure === 'case-study' ? (
+          <CaseStudyStructure
+            config={config}
+            stats={stats}
+            enabledSections={enabledSections}
+            renderSection={renderSection}
           />
         ) : (
           <ScrollStructure
