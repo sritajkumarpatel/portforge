@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import config from './config.json';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
@@ -40,11 +41,15 @@ const SECTION_MAP = {
 };
 
 const enabledSections = (config.sections || []).filter((s) => s.enabled !== false);
+const navStyle = config.theme?.navStyle || 'scroll';
+const isTabsNav = navStyle === 'tabs';
 
 const App = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState(() =>
+    isTabsNav ? enabledSections[0]?.id || 'hero' : 'hero',
+  );
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRefs = useRef({});
 
@@ -59,6 +64,10 @@ const App = () => {
   }, []);
 
   const scrollToSection = useCallback((sectionId) => {
+    if (isTabsNav) {
+      setActiveSection(sectionId);
+      return;
+    }
     const element = sectionRefs.current[sectionId];
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -73,6 +82,8 @@ const App = () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setScrollProgress(progress);
+
+      if (isTabsNav) return;
 
       const offsets = sectionIds.map((id) => {
         const el = sectionRefs.current[id];
@@ -126,6 +137,14 @@ const App = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-bg-primary text-text-primary relative">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[200] focus:rounded-lg focus:px-4 focus:py-2 focus:text-sm focus:font-semibold"
+        style={{ backgroundColor: 'var(--color-primary)', color: 'var(--color-bg-primary)' }}
+      >
+        Skip to content
+      </a>
+
       <AnimatedBackground />
 
       <Nav
@@ -133,20 +152,44 @@ const App = () => {
         scrollToSection={scrollToSection}
         config={config}
         scrollProgress={scrollProgress}
+        navStyle={navStyle}
       />
 
-      <main className="flex-1 relative z-10">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className={`flex-1 relative z-10 ${navStyle === 'timeline' ? 'md:pl-56' : ''}`}
+      >
         <div ref={(el) => (sectionRefs.current['hero'] = el)}>
           <Hero config={config} stats={stats} />
         </div>
 
         {config.bentoGrid?.enabled !== false && <BentoGrid highlights={highlights} />}
 
-        {enabledSections.map((section) => (
-          <div key={section.id} ref={(el) => (sectionRefs.current[section.id] = el)}>
-            {renderSection(section.id)}
-          </div>
-        ))}
+        {isTabsNav ? (
+          <AnimatePresence mode="wait">
+            {activeSection && (
+              <motion.div
+                key={activeSection}
+                id={`panel-${activeSection}`}
+                role="tabpanel"
+                aria-labelledby={`tab-${activeSection}`}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
+              >
+                {renderSection(activeSection)}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        ) : (
+          enabledSections.map((section) => (
+            <div key={section.id} ref={(el) => (sectionRefs.current[section.id] = el)}>
+              {renderSection(section.id)}
+            </div>
+          ))
+        )}
       </main>
 
       <Footer config={config} />

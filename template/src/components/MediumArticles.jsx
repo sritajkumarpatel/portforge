@@ -51,7 +51,7 @@ export default function MediumArticles({ articles, mediumHandle }) {
           <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
             <Lightbulb style={{ color: 'var(--color-primary)' }} size={28} />
           </motion.div>
-          <h3
+          <h2
             className="text-2xl md:text-3xl font-bold"
             style={{ color: 'var(--color-text-primary)' }}
           >
@@ -64,7 +64,7 @@ export default function MediumArticles({ articles, mediumHandle }) {
             <span className="italic" style={{ color: 'var(--color-primary)' }}>
               Ideas
             </span>
-          </h3>
+          </h2>
         </div>
         <p className="text-sm ml-10" style={{ color: 'var(--color-text-muted)' }}>
           Writing on AI engineering, test automation, and building better teams
@@ -157,12 +157,12 @@ export default function MediumArticles({ articles, mediumHandle }) {
                           </span>
                         )}
                       </div>
-                      <h4
+                      <h3
                         className="text-xl md:text-2xl font-bold mb-2"
                         style={{ color: 'var(--color-text-primary)' }}
                       >
                         {featuredArticle.title}
-                      </h4>
+                      </h3>
                     </div>
                     <motion.div
                       className="p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0 ml-4"
@@ -239,12 +239,12 @@ export default function MediumArticles({ articles, mediumHandle }) {
                               {article.topic}
                             </span>
                           )}
-                          <h4
+                          <h3
                             className="font-semibold line-clamp-2"
                             style={{ color: 'var(--color-text-primary)' }}
                           >
                             {article.title}
-                          </h4>
+                          </h3>
                         </div>
                         <motion.div
                           className="p-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0"

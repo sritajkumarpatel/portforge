@@ -1,18 +1,49 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Sun, Moon, Palette, Home, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
 
-export default function Nav({ activeSection, scrollToSection, config, scrollProgress }) {
-  const { theme, toggleMode, setPreset, presets, mounted } = useTheme();
+export default function Nav({
+  activeSection,
+  scrollToSection,
+  config,
+  scrollProgress,
+  navStyle = 'scroll',
+}) {
+  const { theme, toggleMode, setPreset, setCustomTheme, presets, mounted } = useTheme();
   const [showPresets, setShowPresets] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const tabRefs = useRef([]);
+
+  const isTabs = navStyle === 'tabs';
+  const isTimeline = navStyle === 'timeline';
 
   const enabledSections = (config.sections || []).filter((s) => s.enabled !== false);
-  const navItems = [
-    { id: 'hero', label: 'Home', icon: Home },
-    ...enabledSections.map((s) => ({ id: s.id, label: s.navLabel || s.label })),
-  ];
+  const sectionItems = enabledSections.map((s) => ({ id: s.id, label: s.navLabel || s.label }));
+  const navItems = isTabs
+    ? sectionItems
+    : [{ id: 'hero', label: 'Home', icon: Home }, ...sectionItems];
+
+  const goHome = () => {
+    if (isTabs) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      scrollToSection('hero');
+    }
+  };
+
+  const handleTabKeyDown = (e, index) => {
+    let next = null;
+    if (e.key === 'ArrowRight') next = (index + 1) % sectionItems.length;
+    else if (e.key === 'ArrowLeft') next = (index - 1 + sectionItems.length) % sectionItems.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = sectionItems.length - 1;
+    if (next !== null) {
+      e.preventDefault();
+      scrollToSection(sectionItems[next].id);
+      tabRefs.current[next]?.focus();
+    }
+  };
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -26,9 +57,9 @@ export default function Nav({ activeSection, scrollToSection, config, scrollProg
     return (
       <nav className="nav-bg fixed top-0 w-full z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-xl font-extrabold" style={{ color: 'var(--color-primary)' }}>
+          <p className="nav-brand text-xl font-extrabold" style={{ color: 'var(--color-primary)' }}>
             {config.personal.name}
-          </h1>
+          </p>
         </div>
       </nav>
     );
@@ -38,54 +69,69 @@ export default function Nav({ activeSection, scrollToSection, config, scrollProg
     <>
       <nav className="nav-bg fixed top-0 w-full z-50">
         <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-          <motion.h1
+          <motion.button
+            type="button"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-lg font-extrabold cursor-pointer"
+            className="nav-brand text-lg font-extrabold cursor-pointer"
             style={{ color: 'var(--color-primary)' }}
-            onClick={() => scrollToSection('hero')}
+            onClick={goHome}
           >
             {config.personal.name}
-          </motion.h1>
+          </motion.button>
 
           <div className="flex items-center gap-2">
-            <div className="hidden md:flex items-center gap-1">
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className={`relative px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                    activeSection === item.id ? '' : 'hover:opacity-80'
-                  }`}
-                  style={{
-                    color:
-                      activeSection === item.id
-                        ? 'var(--color-primary)'
-                        : 'var(--color-text-muted)',
-                    backgroundColor:
-                      activeSection === item.id
-                        ? 'rgba(var(--color-primary-rgb), 0.1)'
-                        : 'transparent',
-                  }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  {item.icon && <item.icon size={12} className="inline mr-1" />}
-                  {item.label}
-                  {activeSection === item.id && (
-                    <motion.div
-                      layoutId="navIndicator"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full"
-                      style={{ backgroundColor: 'var(--color-primary)' }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    />
-                  )}
-                </motion.button>
-              ))}
-            </div>
+            {!isTimeline && (
+              <div
+                className="hidden md:flex items-center gap-1"
+                role={isTabs ? 'tablist' : undefined}
+                aria-label={isTabs ? 'Sections' : undefined}
+              >
+                {navItems.map((item, index) => {
+                  const selected = activeSection === item.id;
+                  const sectionIndex = isTabs ? index : -1;
+                  return (
+                    <motion.button
+                      key={item.id}
+                      ref={isTabs ? (el) => (tabRefs.current[sectionIndex] = el) : undefined}
+                      role={isTabs ? 'tab' : undefined}
+                      aria-selected={isTabs ? selected : undefined}
+                      aria-current={!isTabs && selected ? 'page' : undefined}
+                      id={isTabs ? `tab-${item.id}` : undefined}
+                      aria-controls={isTabs ? `panel-${item.id}` : undefined}
+                      {...(isTabs ? { tabIndex: selected ? 0 : -1 } : {})}
+                      onKeyDown={isTabs ? (e) => handleTabKeyDown(e, sectionIndex) : undefined}
+                      onClick={() => scrollToSection(item.id)}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                      className={`relative px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                        selected ? '' : 'hover:opacity-80'
+                      }`}
+                      style={{
+                        color: selected ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                        backgroundColor: selected
+                          ? 'rgba(var(--color-primary-rgb), 0.1)'
+                          : 'transparent',
+                      }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {item.icon && <item.icon size={12} className="inline mr-1" />}
+                      {item.label}
+                      {selected && (
+                        <motion.div
+                          layoutId="navIndicator"
+                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full"
+                          style={{ backgroundColor: 'var(--color-primary)' }}
+                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                        />
+                      )}
+                    </motion.button>
+                  );
+                })}
+              </div>
+            )}
 
             <div className="flex items-center gap-1 ml-2">
               <AnimatePresence>
@@ -125,6 +171,38 @@ export default function Nav({ activeSection, scrollToSection, config, scrollProg
                         {key.replace('-', ' / ')}
                       </button>
                     ))}
+
+                    <div
+                      className="mt-2 pt-2 flex items-center gap-3 px-2"
+                      style={{ borderTop: '1px solid var(--color-border)' }}
+                    >
+                      <label
+                        className="flex items-center gap-1.5 text-xs cursor-pointer"
+                        style={{ color: 'var(--color-text-secondary)' }}
+                      >
+                        <input
+                          type="color"
+                          aria-label="Custom primary color"
+                          value={theme.customTheme?.primaryHex || '#6366f1'}
+                          onChange={(e) => setCustomTheme({ primaryHex: e.target.value })}
+                          className="w-5 h-5 rounded border-0 bg-transparent cursor-pointer"
+                        />
+                        Primary
+                      </label>
+                      <label
+                        className="flex items-center gap-1.5 text-xs cursor-pointer"
+                        style={{ color: 'var(--color-text-secondary)' }}
+                      >
+                        <input
+                          type="color"
+                          aria-label="Custom accent color"
+                          value={theme.customTheme?.accentHex || '#f59e0b'}
+                          onChange={(e) => setCustomTheme({ accentHex: e.target.value })}
+                          className="w-5 h-5 rounded border-0 bg-transparent cursor-pointer"
+                        />
+                        Accent
+                      </label>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -170,13 +248,56 @@ export default function Nav({ activeSection, scrollToSection, config, scrollProg
         />
       </nav>
 
+      {isTimeline && sectionItems.length > 0 && (
+        <nav
+          aria-label="Section timeline"
+          className="hidden md:block fixed left-4 top-1/2 -translate-y-1/2 z-40 w-44"
+        >
+          <div
+            className="relative flex flex-col gap-6 pl-4"
+            style={{ borderLeft: '2px solid var(--color-border)' }}
+          >
+            {sectionItems.map((item) => {
+              const selected = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => scrollToSection(item.id)}
+                  className="group relative flex items-center gap-2 text-left"
+                  aria-current={selected ? 'page' : undefined}
+                >
+                  <span
+                    className="absolute -left-[21px] w-3 h-3 rounded-full transition-all"
+                    style={{
+                      backgroundColor: selected
+                        ? 'var(--color-primary)'
+                        : 'var(--color-border-strong)',
+                      boxShadow: selected
+                        ? '0 0 0 4px rgba(var(--color-primary-rgb), 0.2)'
+                        : 'none',
+                    }}
+                  />
+                  <span
+                    className="text-xs font-medium whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity"
+                    style={{ color: selected ? 'var(--color-primary)' : 'var(--color-text-muted)' }}
+                  >
+                    {item.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+      )}
+
       <AnimatePresence>
         {showBackToTop && (
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            onClick={() => scrollToSection('hero')}
+            onClick={goHome}
             className="fixed bottom-6 right-6 z-50 p-3 rounded-full shadow-lg"
             style={{
               backgroundColor: 'var(--color-primary)',

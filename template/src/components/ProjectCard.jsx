@@ -86,12 +86,12 @@ export default function ProjectCard({ project, onOpenModal }) {
 
       {/* Content */}
       <div className="p-4">
-        <h4
+        <h3
           className={`font-bold mb-2 ${isFeatured ? 'text-lg' : 'text-base'}`}
           style={{ color: 'var(--color-accent)' }}
         >
           {project.title}
-        </h4>
+        </h3>
 
         <p
           className="text-sm mb-3 leading-relaxed line-clamp-2"

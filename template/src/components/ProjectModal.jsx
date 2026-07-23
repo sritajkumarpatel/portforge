@@ -141,12 +141,12 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             {/* Key Features */}
             {project.keyFeatures && project.keyFeatures.length > 0 && (
               <div className="mb-6">
-                <h4
+                <h3
                   className="text-sm font-semibold mb-3 uppercase tracking-wider"
                   style={{ color: 'var(--color-text-muted)' }}
                 >
                   Key Features
-                </h4>
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.keyFeatures.map((feature, i) => (
                     <span
@@ -167,12 +167,12 @@ export default function ProjectModal({ project, isOpen, onClose }) {
             {/* Technologies */}
             {project.technologies && project.technologies.length > 0 && (
               <div className="mb-6">
-                <h4
+                <h3
                   className="text-sm font-semibold mb-3 uppercase tracking-wider"
                   style={{ color: 'var(--color-text-muted)' }}
                 >
                   Technologies
-                </h4>
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, i) => (
                     <span
@@ -200,13 +200,13 @@ export default function ProjectModal({ project, isOpen, onClose }) {
                   border: '1px solid var(--color-border)',
                 }}
               >
-                <h4
+                <h3
                   className="text-sm font-semibold mb-3 flex items-center gap-2"
                   style={{ color: 'var(--color-accent)' }}
                 >
                   <BookOpen size={16} />
                   {project.quickStart.title}
-                </h4>
+                </h3>
                 <ol
                   className="text-sm space-y-2 ml-4 list-decimal"
                   style={{ color: 'var(--color-text-secondary)' }}

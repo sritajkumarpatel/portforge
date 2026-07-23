@@ -149,14 +149,14 @@ export default function TechStack({ techStacks }) {
           <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
             <Code2 style={{ color: 'var(--color-primary)' }} size={28} />
           </motion.div>
-          <h3 className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+          <h2 className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
             <span
               style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}
             >
               03
             </span>
             What I Work With
-          </h3>
+          </h2>
         </div>
         <p className="text-sm ml-11" style={{ color: 'var(--color-text-muted)' }}>
           {totalSkills} technologies across {expertiseAreas.length} domains — each chosen for a
@@ -200,12 +200,12 @@ export default function TechStack({ techStacks }) {
                     <IconComponent size={22} style={{ color: area.color }} />
                   </div>
                   <div className="min-w-0">
-                    <h4
+                    <h3
                       className="text-base font-bold"
                       style={{ color: 'var(--color-text-primary)' }}
                     >
                       {area.title}
-                    </h4>
+                    </h3>
                     <p className="text-xs mt-0.5" style={{ color: 'var(--color-text-muted)' }}>
                       {area.description}
                     </p>

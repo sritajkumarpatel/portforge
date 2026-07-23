@@ -27,12 +27,12 @@ export default function Certifications({ certifications }) {
         <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
           <Award style={{ color: 'var(--color-primary)' }} size={32} />
         </motion.div>
-        <h3 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
+        <h2 className="text-3xl font-bold" style={{ color: 'var(--color-primary)' }}>
           <span style={{ color: 'var(--color-accent)', fontSize: '0.75em', marginRight: '0.5rem' }}>
             07
           </span>
           Certifications
-        </h3>
+        </h2>
       </div>
 
       <motion.div
@@ -59,12 +59,12 @@ export default function Certifications({ certifications }) {
                 />
               )}
               <div className="flex-1">
-                <h4
+                <h3
                   className="font-semibold text-sm mb-1"
                   style={{ color: 'var(--color-primary)' }}
                 >
                   {cert.name}
-                </h4>
+                </h3>
                 <p className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
                   {cert.issuer}
                 </p>

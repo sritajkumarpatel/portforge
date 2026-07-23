@@ -15,7 +15,7 @@ export default function Projects({ projects, onOpenModal }) {
         >
           Case Studies
         </p>
-        <h3
+        <h2
           className="text-3xl md:text-4xl font-bold"
           style={{ color: 'var(--color-text-primary)' }}
         >
@@ -26,7 +26,7 @@ export default function Projects({ projects, onOpenModal }) {
           <span className="italic" style={{ color: 'var(--color-primary)' }}>
             Work
           </span>
-        </h3>
+        </h2>
       </div>
 
       <div className="space-y-8">
@@ -111,12 +111,12 @@ export default function Projects({ projects, onOpenModal }) {
                           Featured
                         </span>
                       )}
-                      <h4
+                      <h3
                         className="text-xl md:text-2xl font-bold"
                         style={{ color: 'var(--color-text-primary)' }}
                       >
                         {project.title}
-                      </h4>
+                      </h3>
                     </div>
                   </div>
 

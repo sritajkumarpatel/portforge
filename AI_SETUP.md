@@ -65,10 +65,10 @@ Also update config.json → `theme.visualStyle`.
 
 Ask: *"How should navigation work?"*
 
-Options:
-- **scroll** — Single page, sections flow vertically (default)
-- **tabs** — Tab bar switches between sections
-- **timeline** — Vertical timeline layout
+Options (set `theme.navStyle` in config.json):
+- **scroll** — Top nav bar with links; clicking smooth-scrolls to each section (default)
+- **tabs** — Top nav renders as tabs; only the selected section's content is shown, no scrolling between sections
+- **timeline** — Top bar keeps just your name + theme controls; a vertical dot-and-line rail on the left (desktop only) lets you jump between sections while the page still scrolls normally
 
 ---
 
@@ -76,10 +76,10 @@ Options:
 
 Ask: *"How should the hero section look?"*
 
-Options:
+Options (set `theme.heroLayout` in config.json):
 - **center-profile** — Photo, name, titles centered (default)
-- **left-profile** — Photo left, text right
-- **full-image** — Full background image with overlay
+- **left-profile** — Photo left, text right, two-column on desktop
+- **full-image** — Full-bleed background image with a dark overlay for text legibility, no avatar. If you have a hero background photo, save it as `public/images/hero-bg.jpg`; if you don't, the layout still looks fine — it just falls back to a plain gradient.
 
 ---
 
@@ -93,12 +93,13 @@ Show the presets:
 | emerald-teal | Emerald | Teal |
 | rose-fuchsia | Rose | Fuchsia |
 | blue-cyan | Blue | Cyan |
-| purple-pink | Purple | Pink |
+| slate-cyan | Slate | Cyan |
+| indigo-amber | Indigo | Amber |
 
 Also ask if they want custom colors:
 - *"Want custom colors? I can set any hex values for primary, accent, and background."*
-- If yes, ask for hex values and set `theme.customTheme` in config.json
-- Then update `themes/active.css` with the custom color values
+- If yes, ask for hex values and set `theme.customTheme.primaryHex` / `accentHex` / `darkBg` in config.json. That's it — the app reads these at runtime and generates light/dark variants automatically, no CSS editing needed. (There's also a live color picker in the running app's nav — click the palette icon.)
+- Picking a preset later clears any custom hex override.
 
 Also ask: *"Dark mode or light mode?"*
 
@@ -203,3 +204,4 @@ Verify the build succeeds. Tell the user:
 - Validate JSON syntax after every edit.
 - Run `npm run build` at the end to confirm the project compiles.
 - The LinkedIn import script (scripts/import-linkedin.js) generates JSON from raw LinkedIn text.
+- If the user has a photo, save it as `public/images/profile.png`. If they don't, that's fine — the hero shows their initials instead automatically.
