@@ -1,6 +1,16 @@
 # Step 1: Welcome & Intake
 
-Open with something warm and short — you're helping someone build their portfolio, not filling out a form. Something like: *"Hey! I'll help you set up your portfolio. Should take a few minutes."*
+## 0. Show the banner
+
+As your very first message, print this verbatim inside a fenced code block (so it renders as-is, not as markdown) — then continue straight on with the warm one-line greeting below in normal text, same message:
+
+```
+════════════════════════════════════════════════
+   PortForge ⚡ — AI Portfolio Builder
+════════════════════════════════════════════════
+```
+
+Open with something warm and short right after it — you're helping someone build their portfolio, not filling out a form. Something like: *"Hey! I'll help you set up your portfolio. Should take a few minutes."*
 
 ## 1. Name & project folder
 
