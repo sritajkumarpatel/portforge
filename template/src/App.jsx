@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import config from './config.json';
 import Nav from './components/Nav';
 import ScrollStructure from './structures/ScrollStructure';
+import DashboardStructure from './structures/DashboardStructure';
 import Certifications from './components/Certifications';
 import certifications from './data/certifications.json';
 import Experience from './components/Experience';
@@ -137,6 +138,41 @@ const App = () => {
     return <Component {...props} />;
   };
 
+  const getSectionTeaser = (sectionId) => {
+    switch (sectionId) {
+      case 'about':
+        return aboutMe?.shortBio || 'A bit about me';
+      case 'experience':
+        return experience.length
+          ? `${experience.length} role${experience.length > 1 ? 's' : ''} — most recently ${experience[0]?.company || ''}`
+          : 'Work history';
+      case 'tech':
+        return techStacks?.expertise?.length
+          ? `${techStacks.expertise.length} skill area${techStacks.expertise.length > 1 ? 's' : ''}`
+          : 'Skills & tools';
+      case 'articles':
+        return mediumArticles.length
+          ? `${mediumArticles.length} article${mediumArticles.length > 1 ? 's' : ''}`
+          : 'Writing';
+      case 'projects':
+        return projects.length
+          ? `${projects.length} project${projects.length > 1 ? 's' : ''}`
+          : 'Things I have built';
+      case 'awards':
+        return awards.length
+          ? `${awards.length} award${awards.length > 1 ? 's' : ''}`
+          : 'Recognition';
+      case 'certifications':
+        return certifications.length
+          ? `${certifications.length} certification${certifications.length > 1 ? 's' : ''}`
+          : 'Certifications';
+      case 'education':
+        return education[0]?.degree || 'Education';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-bg-primary text-text-primary relative">
       <a
@@ -163,18 +199,28 @@ const App = () => {
         tabIndex={-1}
         className={`flex-1 relative z-10 ${navStyle === 'timeline' && showSectionLinks ? 'md:pl-56' : ''}`}
       >
-        {/* structure === 'bento' | 'case-study' | 'terminal' | 'multi-page' plug in here as they're built */}
-        <ScrollStructure
-          config={config}
-          stats={stats}
-          highlights={highlights}
-          enabledSections={enabledSections}
-          sectionRefs={sectionRefs}
-          isTabsNav={isTabsNav}
-          activeSection={activeSection}
-          renderSection={renderSection}
-          compact={structure === 'resume'}
-        />
+        {/* structure === 'case-study' | 'terminal' | 'multi-page' plug in here as they're built */}
+        {structure === 'bento' ? (
+          <DashboardStructure
+            config={config}
+            stats={stats}
+            enabledSections={enabledSections}
+            renderSection={renderSection}
+            getSectionTeaser={getSectionTeaser}
+          />
+        ) : (
+          <ScrollStructure
+            config={config}
+            stats={stats}
+            highlights={highlights}
+            enabledSections={enabledSections}
+            sectionRefs={sectionRefs}
+            isTabsNav={isTabsNav}
+            activeSection={activeSection}
+            renderSection={renderSection}
+            compact={structure === 'resume'}
+          />
+        )}
       </main>
 
       <Footer config={config} />
