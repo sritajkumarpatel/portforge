@@ -79,6 +79,19 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 | **Certifications** | Grid with optional issuer logos and dates |
 | **Education** | Cards with degree, institution, period, focus tags |
 
+### Portfolio Structures
+
+Not just a color swap — 6 genuinely different site shapes:
+
+| Structure | What's different |
+|---|---|
+| **Scroll** (default) | One page, sections stacked, nav scrolls to each |
+| **Bento** | Compact hero + a dashboard grid of section cards — click one to open it, nothing scrolls |
+| **Case Study** | Projects lead immediately after the hero; everything else collapses into a secondary accordion |
+| **Resume** | Same as Scroll but denser — no background animation, no highlights strip, tighter spacing |
+| **Terminal** | A real simulated command-line shell (`help`, `about`, `projects`, `open <n>`, ...) instead of a webpage |
+| **Multi-Page** | Separate routed pages (Home, Projects, Experience, ...) instead of one scrolling page |
+
 ### Visual Customization
 
 - **5 visual styles** — Minimal (clean/professional), Bold (high contrast/dramatic), Terminal (monospace/CRT retro), Editorial (serif, calm, text-first), Brutalist (stark, raw, sharp-edged)
@@ -114,6 +127,7 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 - [x] Tabbed and timeline navigation modes
 - [x] More hero layouts (left-profile, full-image, text-only)
 - [x] Describe-your-vibe AI-assisted design picker
+- [x] 6 portfolio structures (scroll, bento, case-study, resume, terminal, multi-page)
 - [ ] Screenshot / GIF demo in README
 - [ ] Data schema validation (JSON Schema or Zod)
 - [ ] Component unit tests (Vitest + Testing Library)
@@ -181,10 +195,12 @@ portforge/
 │   │   ├── robots.txt
 │   │   └── sitemap.xml
 │   ├── src/
-│   │   ├── components/      # 18 React components (Hero, About, Experience, etc.)
+│   │   ├── components/      # React components (Hero, About, Experience, etc.)
+│   │   ├── structures/      # The 6 portfolio structures (scroll, bento, case-study, ...)
 │   │   ├── themes/          # Visual style CSS (minimal/bold/terminal/editorial/brutalist)
 │   │   ├── data/            # JSON content files (edit these)
 │   │   ├── context/         # ThemeContext (dark/light, color presets)
+│   │   ├── hooks/           # Shared hooks (e.g. useFocusTrap)
 │   │   ├── config.json      # Central configuration
 │   │   ├── App.jsx
 │   │   └── index.css

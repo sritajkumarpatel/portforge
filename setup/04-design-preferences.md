@@ -1,6 +1,27 @@
 # Step 4: Design Preferences
 
-Content is settled. Now decide how it should look.
+Content is settled. Now decide how it should look — and, first, how it's *shaped*.
+
+## Portfolio Structure
+
+Ask: *"Before the visual stuff — how do you want the whole site to work?"*
+
+Options (set `theme.portfolioStructure` in `config.json`):
+
+| Structure | What's different | Best For |
+|-----------|-------------------|----------|
+| **scroll** | One page, sections stacked, nav scrolls to each (default) | The classic portfolio — works for everyone |
+| **bento** | Compact hero + a dashboard grid of section cards; click a card to open it, nothing scrolls | People who want a glanceable, single-viewport landing |
+| **case-study** | Projects lead immediately after the hero; everything else collapses into a secondary accordion | Project-first portfolios — design/builder-heavy work |
+| **resume** | Same as scroll but denser — no background animation, no highlights strip, tighter spacing | Recruiter-facing, scan-fast portfolios |
+| **terminal** | A real simulated command-line shell (`help`, `about`, `projects`, etc.) instead of a webpage | Engineers who want something memorable and on-brand |
+| **multi-page** | Separate routed pages (Home, Projects, Experience, ...) instead of one scrolling page | People who want a more traditional "website" feel |
+
+This choice changes which of the following questions even apply:
+- **terminal** replaces the entire page — skip Visual Style, Navigation Style, and Hero Layout entirely (none of them apply; the terminal always looks like a terminal). Still ask Color Theme (it reads the same color variables) and Sections (still determines which commands exist).
+- **multi-page** has its own routed nav — skip Navigation Style. Visual Style, Hero Layout, and Color Theme still apply normally.
+- **bento** and **case-study** don't use the scroll-anchored nav links — Navigation Style still asks fine, it just won't be visibly different since there's nothing to scroll to.
+- **scroll** and **resume** — everything below applies as normal.
 
 ## Pick a path
 
@@ -15,13 +36,14 @@ Ask: *"Describe what you're going for — words, colors, references, whatever co
 
 Take whatever they give you and map it yourself against the real options below — don't invent a 6th style or a made-up config value to match their words more closely; pick the closest real fit for each axis:
 
-- **Visual style** → closest match from the Visual Style table below (color/mood words lean Minimal/Editorial/Brutalist; "dramatic", "high-contrast", "bold" leans Bold; "hacker", "code", "green-on-black", "matrix" leans Terminal; "serif", "calm", "editorial", "essay", "writer" leans Editorial; "raw", "unpolished", "concrete", "harsh" leans Brutalist).
-- **Hero layout** → if they mention not wanting a photo, or "text-first", use `text-only`; if they describe a big background image, use `full-image`; otherwise default to `center-profile` unless they clearly want a side-by-side layout (`left-profile`).
-- **Nav style** → default to `scroll` unless they specifically describe tabs or a timeline/sidebar feel.
+- **Portfolio structure** → "dashboard", "cards", "bento", "everything at a glance" leans `bento`; "projects first", "case studies", "portfolio gallery" leans `case-study`; "resume", "CV", "dense", "for recruiters" leans `resume`; "terminal", "command line", "hacker shell", "like a CLI" leans `terminal`; "separate pages", "multi page", "like a real website" leans `multi-page`; otherwise default `scroll`.
+- **Visual style** → closest match from the Visual Style table below (color/mood words lean Minimal/Editorial/Brutalist; "dramatic", "high-contrast", "bold" leans Bold; "hacker", "code", "green-on-black", "matrix" leans Terminal; "serif", "calm", "editorial", "essay", "writer" leans Editorial; "raw", "unpolished", "concrete", "harsh" leans Brutalist). Skip this entirely if structure is `terminal` (doesn't apply).
+- **Hero layout** → if they mention not wanting a photo, or "text-first", use `text-only`; if they describe a big background image, use `full-image`; otherwise default to `center-profile` unless they clearly want a side-by-side layout (`left-profile`). Skip if structure is `terminal`.
+- **Nav style** → default to `scroll` unless they specifically describe tabs or a timeline/sidebar feel. Skip if structure is `terminal` or `multi-page`.
 - **Color** → if they name specific colors, set `theme.customTheme` hex values directly rather than forcing it into the nearest preset. If they name a mood without specific colors ("warm", "cool", "earthy"), pick the closest preset from the Color Theme table.
 - **Mode** → dark unless they say otherwise or their description clearly implies light/paper/bright.
 
-State your interpretation back before touching any files: *"Here's what I'm setting: Editorial style, text-only hero, slate-cyan colors, dark mode. Sound right, or want to adjust anything?"* Only apply it once they confirm or correct you — same rule as content extraction, don't finalize a guess silently.
+State your interpretation back before touching any files: *"Here's what I'm setting: case-study structure, Editorial style, text-only hero, slate-cyan colors, dark mode. Sound right, or want to adjust anything?"* (Omit any axis you skipped per the rules above.) Only apply it once they confirm or correct you — same rule as content extraction, don't finalize a guess silently.
 
 If their description leaves an axis genuinely ambiguous (rare, but possible), ask about just that one thing rather than guessing.
 
@@ -29,7 +51,7 @@ Once confirmed and applied, skip "One at a time" entirely and go to "Sections" b
 
 ## One at a time
 
-Ask about each of these in turn.
+Ask about each of these in turn, applying the skip rules from the Portfolio Structure section above (skip Visual Style/Hero Layout/Nav Style entirely if structure is `terminal`; skip Nav Style if structure is `multi-page`).
 
 ### Visual Style
 

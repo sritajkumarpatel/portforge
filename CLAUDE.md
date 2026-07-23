@@ -42,7 +42,7 @@ The core product isn't code, it's a set of instruction documents written *for an
 1. `setup/01-welcome-and-intake.md` — greet, get name + project folder, copy `template/` to `./{project-name}/`, append that folder to the root `.gitignore` if running inside a clone of this repo, offer LinkedIn/resume paste (both optional).
 2. `setup/02-extract-from-sources.md` — **if** LinkedIn/resume text was pasted, the agent reads and understands it directly (no parsing script) and maps it into the content schema, then confirms with the user before writing anything.
 3. `setup/03-manual-questions.md` — one-question-at-a-time content gathering, used standalone (both sources skipped) or just to fill whatever gaps extraction left.
-4. `setup/04-design-preferences.md` — visual style, `navStyle`, `heroLayout`, color theme, section order.
+4. `setup/04-design-preferences.md` — `portfolioStructure` (asked first, since it determines which other questions apply), visual style, `navStyle`, `heroLayout`, color theme, section order.
 5. `setup/05-finalize.md` — SEO, deploy config, install/build verification, hand-off message.
 
 `setup/content-schema.md` is the single source of truth both step 2 and step 3 read from — every `config.json`/`src/data/*.json` field is tagged `[fact]` (must come from real pasted text or a direct answer, never invented), `[derived]` (computed from facts already gathered), `[draft]` (agent may propose it, user must approve before it's written), or `[ask]` (always a direct question). If you're asked to change the setup flow, edit the relevant `setup/*.md` file — don't add a second copy of instructions elsewhere, and don't add a deterministic parsing script for LinkedIn/resume text; that's a deliberate choice (regex-style parsing of PDF-exported text produces confidently-wrong data — an old `scripts/import-linkedin.js` did exactly this and was removed for that reason).
@@ -52,6 +52,19 @@ The core product isn't code, it's a set of instruction documents written *for an
 All user-specific content lives in `template/src/config.json` (personal info, theme choice, section enable/order, `bentoGrid.enabled`) and `template/src/data/*.json` (one file per section: `aboutMe`, `experience`, `techStacks`, `projects`, `mediumArticles`, `awards`, `certifications`, `education`, plus `stats` and `highlights` for the optional row under the hero). Components in `template/src/components/` read this data — they are never hand-edited with user content. When personalizing a portfolio, only touch `config.json`, `src/data/*.json`, `src/themes/active.css`, `index.html`, and `vite.config.js`.
 
 Each content section has a matching component (e.g. `experience.json` ↔ `Experience.jsx`, `techStacks.json` ↔ `TechStack.jsx`). `App.jsx` renders sections based on the `sections[]` array in `config.json` (id, label, navLabel, enabled), so reordering/toggling sections is a config change, not a code change.
+
+### Portfolio structures (`template/src/structures/`)
+
+`config.theme.portfolioStructure` (`scroll` / `bento` / `case-study` / `resume` / `terminal` / `multi-page`) is the top-level structural switch, dispatched in `App.jsx`. This is a different axis from theming below — it changes the actual information architecture, not just colors/fonts:
+
+- **`scroll`** (default), **`bento`**, **`case-study`** share the normal shell (`AnimatedBackground`, `Nav`, `Footer`, `ProjectModal` all still rendered by `App.jsx`) and only swap the `<main>` body — `ScrollStructure.jsx` / `DashboardStructure.jsx` / `CaseStudyStructure.jsx` respectively.
+- **`resume`** reuses `ScrollStructure` with `compact` — same content/order, but `.resume-mode` (set on the root div) drops `AnimatedBackground`, the bento highlights row, and flattens `.glass-card`/section spacing via CSS in `index.css`. It's a density variant, not a separate component.
+- **`terminal`** and **`multi-page`** are full top-level replacements — `App.jsx` returns them directly (with `ProjectModal` still mounted alongside, so `open <project>` / clicking a project still works) instead of rendering the shared shell at all. Neither uses `Nav.jsx`, `Hero.jsx`'s layout variants, or the theme CSS files' structural rules the same way `scroll`/`bento`/`case-study` do.
+  - `TerminalStructure.jsx` is a real simulated shell — command parsing lives in `structures/terminalCommands.js` as plain functions (string in, string out) that read the exact same JSON data every other structure reads. No separate content source; extend the command set there, not by adding new data files.
+  - `RoutedStructure.jsx` wraps everything in `react-router-dom`'s `HashRouter` (deliberately, not `BrowserRouter` — see the comment at the top of that file for why: it needs zero deploy-config changes on static hosts, where `BrowserRouter` would need Netlify/Vercel rewrite rules and a GitHub Pages 404.html trick). Has its own `RoutedNav.jsx` since the scroll-anchored `Nav.jsx` doesn't apply.
+- `Nav.jsx`'s `showSectionLinks` prop (set in `App.jsx` based on structure) hides the scroll-anchored section links for structures that don't have anything to scroll to.
+
+`SectionDetailModal.jsx` (used by `bento`) and `ProjectModal.jsx` share focus-trap/keyboard behavior via `hooks/useFocusTrap.js` — extend that hook, don't reimplement the pattern a third time.
 
 ### Theming
 
