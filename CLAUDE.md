@@ -56,9 +56,11 @@ Each content section has a matching component (e.g. `experience.json` ↔ `Exper
 ### Theming
 
 Several independent theme axes, all under `config.json`'s `theme` block:
-1. **Visual style** (`visualStyle`: `minimal` / `bold` / `terminal`) — a whole CSS file swap. `template/src/themes/{minimal,bold,terminal}.css` are the source files; whichever is active gets copied wholesale into `template/src/themes/active.css`, which is what's actually imported by the app. Never edit `active.css` as a "theme" — edit the source variant and re-copy it, unless applying one-off custom colors.
-2. **Hero layout** (`heroLayout`: `center-profile` / `left-profile` / `full-image`) and **nav style** (`navStyle`: `scroll` / `tabs` / `timeline`) — structural variants read directly by `Hero.jsx` and `Nav.jsx`/`App.jsx` at runtime, not CSS swaps.
+1. **Visual style** (`visualStyle`: `minimal` / `bold` / `terminal` / `editorial` / `brutalist`) — a whole CSS file swap. `template/src/themes/{minimal,bold,terminal,editorial,brutalist}.css` are the source files; whichever is active gets copied wholesale into `template/src/themes/active.css`, which is what's actually imported by the app. Never edit `active.css` as a "theme" — edit the source variant and re-copy it, unless applying one-off custom colors. Note most of a theme file's `:root{}` color block gets overwritten at runtime by `ThemeContext.jsx` (see point 3) — the lasting differentiation between styles comes from the non-variable rules below it (font-family, `.glass-card`/`nav` overrides), same pattern `terminal.css` established. `editorial` additionally forces `MotionConfig reducedMotion="always"` in `main.jsx` (read directly off `config.theme.visualStyle`) — it's a deliberately calm style, not just a font/color swap.
+2. **Hero layout** (`heroLayout`: `center-profile` / `left-profile` / `full-image` / `text-only`) and **nav style** (`navStyle`: `scroll` / `tabs` / `timeline`) — structural variants read directly by `Hero.jsx` and `Nav.jsx`/`App.jsx` at runtime, not CSS swaps.
 3. **Color preset** (slate-amber, indigo-violet, etc.) plus optional custom hex (`customTheme.primaryHex`/`accentHex`/`darkBg`) — consumed by `template/src/context/ThemeContext.jsx`, which computes CSS variables (including light/dark variants for custom hex) at runtime and persists mode to localStorage. Picking a preset clears any custom hex override.
+
+`setup/04-design-preferences.md` also has a "describe your vibe" free-text path as an alternative to the structured per-axis questions — the agent maps a natural-language description to the closest real options above and confirms before applying, it doesn't invent new config values to match the description more closely.
 
 ### Deployment target awareness
 

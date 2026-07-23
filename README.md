@@ -81,8 +81,11 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 
 ### Visual Customization
 
-- **3 visual styles** — Minimal (clean/professional), Bold (high contrast/dramatic), Terminal (monospace/CRT retro)
-- **7 color presets** — Slate-Amber, Indigo-Violet, Emerald-Teal, Rose-Fuchsia, Blue-Cyan, Purple-Pink, Indigo-Amber
+- **5 visual styles** — Minimal (clean/professional), Bold (high contrast/dramatic), Terminal (monospace/CRT retro), Editorial (serif, calm, text-first), Brutalist (stark, raw, sharp-edged)
+- **4 hero layouts** — center-profile, left-profile, full-image, text-only
+- **3 navigation styles** — scroll, tabs, timeline
+- **Describe-your-vibe mode** — skip the menus and just describe the look you want in your own words; the agent maps it to real settings and confirms before applying anything
+- **7 color presets** — Slate-Amber, Indigo-Violet, Emerald-Teal, Rose-Fuchsia, Blue-Cyan, Slate-Cyan, Indigo-Amber
 - **Custom colors** — any hex values for primary, accent, and background
 - **Dark / Light mode** — toggleable, persisted to localStorage
 
@@ -103,14 +106,15 @@ No account signup. No drag-and-drop. No CMS. Just your data + a React template +
 ## Roadmap
 
 - [x] LinkedIn & resume auto-import (agent-native, no fabricated data)
-- [x] 3 visual themes (Minimal, Bold, Terminal)
+- [x] 5 visual themes (Minimal, Bold, Terminal, Editorial, Brutalist)
 - [x] 7 color presets + custom hex colors
 - [x] 8 configurable content sections
 - [x] Dark/light mode with persistence
 - [x] 1-click deploy (Netlify, Vercel, GitHub Pages)
+- [x] Tabbed and timeline navigation modes
+- [x] More hero layouts (left-profile, full-image, text-only)
+- [x] Describe-your-vibe AI-assisted design picker
 - [ ] Screenshot / GIF demo in README
-- [ ] Tabbed and timeline navigation modes
-- [ ] More hero layouts (left-profile, full-image)
 - [ ] Data schema validation (JSON Schema or Zod)
 - [ ] Component unit tests (Vitest + Testing Library)
 - [ ] VS Code extension for visual config editing
@@ -178,7 +182,7 @@ portforge/
 │   │   └── sitemap.xml
 │   ├── src/
 │   │   ├── components/      # 18 React components (Hero, About, Experience, etc.)
-│   │   ├── themes/          # Visual style CSS (minimal/bold/terminal)
+│   │   ├── themes/          # Visual style CSS (minimal/bold/terminal/editorial/brutalist)
 │   │   ├── data/            # JSON content files (edit these)
 │   │   ├── context/         # ThemeContext (dark/light, color presets)
 │   │   ├── config.json      # Central configuration

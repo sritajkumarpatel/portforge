@@ -109,10 +109,11 @@ function Avatar({ name, size = 'w-32 h-32 md:w-40 md:h-40' }) {
   );
 }
 
-function TitleBlock({ config, displayText, align = 'center', light = false }) {
+function TitleBlock({ config, displayText, align = 'center', light = false, large = false }) {
   const isCenter = align === 'center';
   const textColor = light ? '#ffffff' : 'var(--color-text-primary)';
   const subColor = light ? 'rgba(255,255,255,0.85)' : 'var(--color-text-secondary)';
+  const titleSize = large ? 'text-5xl md:text-6xl lg:text-7xl' : 'text-4xl md:text-5xl lg:text-6xl';
 
   return (
     <motion.div
@@ -122,7 +123,7 @@ function TitleBlock({ config, displayText, align = 'center', light = false }) {
       className={isCenter ? 'text-center' : 'text-center md:text-left'}
     >
       <motion.h1
-        className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-4 min-h-[60px] flex items-center ${
+        className={`${titleSize} font-bold mb-4 min-h-[60px] flex items-center ${
           isCenter ? 'justify-center' : 'justify-center md:justify-start'
         }`}
         style={{ color: textColor }}
@@ -349,6 +350,22 @@ export default function Hero({ config, stats = [] }) {
       hover: 'hover:bg-[#008c54]',
     },
   ];
+
+  if (layout === 'text-only') {
+    return (
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 py-20">
+        <FloatingOrbs />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="flex flex-col items-center gap-8">
+            <TitleBlock config={config} displayText={displayText} align="center" large />
+            <SocialLinks links={socialLinks} justify="justify-center" />
+            <StatsGrid stats={stats} />
+          </div>
+        </div>
+        <ScrollIndicator />
+      </section>
+    );
+  }
 
   if (layout === 'left-profile') {
     return (
