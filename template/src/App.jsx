@@ -5,6 +5,7 @@ import ScrollStructure from './structures/ScrollStructure';
 import DashboardStructure from './structures/DashboardStructure';
 import CaseStudyStructure from './structures/CaseStudyStructure';
 import TerminalStructure from './structures/TerminalStructure';
+import RoutedStructure from './structures/RoutedStructure';
 import Certifications from './components/Certifications';
 import certifications from './data/certifications.json';
 import Experience from './components/Experience';
@@ -194,6 +195,20 @@ const App = () => {
     );
   }
 
+  if (structure === 'multi-page') {
+    return (
+      <>
+        <RoutedStructure
+          config={config}
+          stats={stats}
+          enabledSections={enabledSections}
+          renderSection={renderSection}
+        />
+        <ProjectModal project={selectedProject} isOpen={isModalOpen} onClose={handleCloseModal} />
+      </>
+    );
+  }
+
   return (
     <div
       className={`min-h-screen flex flex-col bg-bg-primary text-text-primary relative ${structure === 'resume' ? 'resume-mode' : ''}`}
@@ -222,7 +237,6 @@ const App = () => {
         tabIndex={-1}
         className={`flex-1 relative z-10 ${navStyle === 'timeline' && showSectionLinks ? 'md:pl-56' : ''}`}
       >
-        {/* structure === 'terminal' | 'multi-page' plug in here as they're built */}
         {structure === 'bento' ? (
           <DashboardStructure
             config={config}
